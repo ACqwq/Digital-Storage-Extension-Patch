@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <DigitalStoragePatch_DigitalBattery.label>Digital Battery</DigitalStoragePatch_DigitalBattery.label>
+  <DigitalStoragePatch_DigitalBattery.description>A power unit for the digital storage network. It hooks into the grid like a vanilla battery and charges and discharges as usual. Energy above the balance line is moved into a shared digital reservoir (capacity up to 9.2 quintillion - the int64 limit) and drawn back when it dips below; every digital battery on every map shares that one reservoir. Each battery can switch its own "auto-balance" off - it then behaves as an ordinary battery and no longer touches the reservoir.</DigitalStoragePatch_DigitalBattery.description>
+</LanguageData>

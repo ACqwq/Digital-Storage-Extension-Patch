@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 恢复 4.0 被删掉的「核心命名」（3.0 有 NetworkName + 重命名按钮）。
+
+       做法：把补丁自带的 CompCoreName 挂到原 mod 的数字存储核心 Def 上。
+       ThingComp 是 RimWorld 给"给别人的 Thing 加数据/加 UI"的标准答案：
+       不用改原程序集、名字随 Thing 存档、gizmo / 检查面板 / 标签都能免费接入。
+
+       ★ 用 PatchOperationSequence + PatchOperationTest 包一层：
+         万一以后原 mod 把 Def 改名了，本 Patch 只是安静地不生效（success=Always 抑制报错），
+         而不是在日志里刷一条 Failed to find 的红字。补丁的其它功能完全不受影响。 -->
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>Defs/ThingDef[defName="DigitalStorage_StorageCore"]/comps</xpath>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DigitalStorage_StorageCore"]/comps</xpath>
+        <value>
+          <li Class="DigitalStorage.Patch.CompProperties_CoreName" />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+</Patch>

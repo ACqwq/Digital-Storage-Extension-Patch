@@ -1,0 +1,17 @@
+# 构建产物
+Assemblies/
+Source/build.rsp
+*.rsp
+*.pdb
+*.user
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE / 本地
+.vs/
+obj/
+bin/
+_*.log
+_*.txt

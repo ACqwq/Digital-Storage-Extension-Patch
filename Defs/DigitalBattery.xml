@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 数字电池（补丁新增建筑 · v0.14）
+
+       = 原版电池行为 + 免自放电 + 共享数字库（跨图输电）+ 周期双向平衡。
+       充放电完全走原版 CompPowerBattery / PowerNet 结算，
+       本建筑只加外观（基座 + 与数字核心同款的悬浮球体），逻辑在
+       Source/CompDigitalBattery.cs 与 Source/DsPowerLedger.cs。
+
+       ★ defName 必须带 DigitalStoragePatch_ 前缀：清理版按这个前缀删除物体。 -->
+  <ThingDef ParentName="DigitalStorage_BuildingBase">
+    <defName>DigitalStoragePatch_DigitalBattery</defName>
+    <label>数字电池</label>
+    <description>使用数字存储系统的电力单元，能像原版电池一样接入电网参与充放电。超出「平衡线」的电量会自动转入单独的数字库，容量上限 922亿亿（int64）；电量低于平衡线时自动从数字库回填。所有地图的数字电池共用同一个数字库。每块电池可以单独关闭「自动平衡」，关掉后只当普通电池用，不再与数字库交互。</description>
+    <thingClass>DigitalStorage.Patch.Building_DigitalBattery</thingClass>
+    <rotatable>false</rotatable>
+
+    <!-- 复用原 mod 的基座贴图，再叠一层数字核心同款的「一束光 + 悬浮球体」。 -->
+    <graphicData>
+      <texPath>2.0/基座</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <drawOffset>(0, 0, 0.5)</drawOffset>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <uiIconScale>0.75</uiIconScale>
+    <fillPercent>0.5</fillPercent>
+    <size>(3,3)</size>
+    <tickerType>Normal</tickerType>
+
+    <building>
+      <!-- 与原 mod 的核心/投影核心同款：不作为 edifice 注册（不参与屋顶与房间几何）。
+           ★ 注意这跟数字收货架正好相反：收货架是 Building_Storage，它的**每格容量**是从
+             edificeGrid 取的，所以那里绝不能写 false（写 false ⇒ 容量恒为 1 堆）。
+             电池没有槽组，格容量与它无关，所以这里 false 是安全的。 -->
+      <isEdifice>false</isEdifice>
+    </building>
+
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>900</WorkToBuild>
+      <Mass>30</Mass>
+    </statBases>
+
+    <costList>
+      <Steel>300</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+
+    <comps>
+      <!-- 容量只是初始值：真实容量由补丁设置写回本 CompProperties 的共享实例，
+           见 DsDigitalBatteryManager.ApplyCapacity()。
+           efficiency 1 = 存取无损耗；shortCircuitInRain false = 淋雨不炸。 -->
+      <li Class="CompProperties_Battery">
+        <compClass>DigitalStorage.Patch.CompDigitalBattery</compClass>
+        <storedEnergyMax>5000</storedEnergyMax>
+        <efficiency>1</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable" />
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+
+    <researchPrerequisites>
+      <li>DigitalStorage_BasicStorage</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

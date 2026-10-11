@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>数字存储·扩展补丁 / Digital Storage Extension Patch</name>
+  <author>AC酱qwq</author>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description><![CDATA[
+【CA】数字存储 · 扩展补丁
+Digital Storage — Extension Patch
+
+为《数字存储 Digital Storage 4.0》打造的扩展补丁：补上缺少的功能，修复已知的 bug。
+本补丁以侧载方式实现，不修改原 mod、不修改游戏本体；绝大多数功能都能单独关闭，关闭即回到原 mod 的行为。
+
+◆ 前置要求
+· 必须启用原 mod：【CA】数字存储-Digital Storage 4.0
+· 需要 Harmony
+
+◆ 新增三个建筑
+· 数字投影核心：把任意一张地图上的数字核心「投影」到当前地图。东西搬进去就直接进那张图的核心，本图的资源统计与交易也会算上它。也能反过来，把核心里的物品铺到本图优先级更高的储存区。
+· 数字收货架：只进不出的收货口。放上去的物品自动转入数字核心，可收什么跟随核心的筛选（会自动同步）。每格都是独立投料位，多人可同时投料。
+· 数字电池：超出平衡线的电存入所有电池共用的数字库，缺电时自动回填 —— 于是跨地图用电是自动的。容量、平衡线、平衡周期都可调，对已建成的电池立即生效。
+
+◆ 核心库存「用得上」
+把东西全存进核心后，下面这些操作原本会因为「看不到核心里的库存」而失败、或选项直接不出现，现在都能用：
+· 医疗与药物：输注血原质、取用血原包、药物暴食取药、按药品政策备药
+· 战斗与生产：炮塔补弹、装填装备、麦汁倒进发酵桶
+· 染色与涂装：染发、改衣物颜色、涂装建筑与地板
+· 生物科技：组装与植入异种胚芽、生化塑形舱补营养、狱警给囚犯送血原包
+· 异象与机械：方尖碑 / 黄金立方体停用（暗黑超凡碎片）、战争女王补钢、聚会进食、按固定清单找料
+· 其它：难民与访客索要物资、异象心灵仪式的祭品、从核心取食时按心情挑合适的食物
+每项都能单独开关；其中「动物随机进食」为实验性、默认关。
+
+◆ 制作代理修复
+· 能识别其它 mod 的灶台 / 厨房 / 工作台（不再「配方选得到却永远缺料」）
+· 「维持数量」达标后让出工作台，后面的配方不再苦等
+· 打开制作面板时可以正常调整游戏速度
+· 支持需要半成品的配方（默认关，实验性）
+
+◆ 便利性
+· 核心命名：给核心起名字，多核心时一眼分清
+· 投影核心面板：直接查看被绑定核心的库存，取出到脚下
+· 增强取料面板：右键取出变成带图标、分组、搜索与「取满」的面板
+· 跨图交易（默认关）：本图没有核心时也能卖其它地图核心里的库存
+· 自动补货（默认关）：把核心里的物品送进优先级更高的储存区
+
+◆ 其它修复与兼容
+· 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出
+· 兼容：搬运类 mod（Pick Up And Haul / Hauler's Dream）、Universal Trade Hub、Better Architect Menu
+
+◆ 可调项
+全部功能都能在「Mod 设置」里单独开关，具体范围与默认值以游戏内说明为准：
+核心容量自定义、收取 / 补货间隔与每趟堆数、工作优先级、用电豁免、性能开关、诊断日志。
+
+◆ 致谢与许可
+原 mod 作者：Cagier.阳（CagierAsh123）—— 感谢原作者的优秀作品。
+原 mod 开源仓库：https://github.com/CagierAsh123/Digital-Storage
+本补丁遵循原 mod 的许可协议（非商用 · 署名 · 衍生同协议开源），完整条款见补丁源码仓库 LICENSE。
+]]></description>
+  <packageId>cagier.digitalstorage.patch</packageId>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>cagier.digitalstorage</packageId>
+      <displayName>【CA】数字存储-Digital Storage 4.0</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3623684313</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>cagier.digitalstorage</li>
+  </loadAfter>
+</ModMetaData>

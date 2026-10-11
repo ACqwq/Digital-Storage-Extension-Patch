@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 数字投影核心（补丁新增建筑）
+
+       非槽组 IHaulDestination + IHaulSource：由原版 Thing.SpawnSetup 自动注册进本图搬运体系。
+       它自己不含库存、不 tick —— 只是把「被绑定核心」的容器代理到本图。
+       见 Source/Building_CoreProjector.cs 顶部的机制说明。 -->
+  <ThingDef ParentName="DigitalStorage_BuildingBase">
+    <defName>DigitalStoragePatch_CoreProjector</defName>
+    <label>数字投影核心</label>
+    <description>把一个数字存储核心（本图或其它地图）投影到此处，实际存储由被绑定的核心决定。建成后右键本建筑选择要绑定的核心。把物品搬进来，会直接进入那张图的核心；本图的资源统计与交易列表也会算上它。投影核心自己不存储、不耗电；绑定的核心不可用时它也随之不可用。</description>
+    <thingClass>DigitalStorage.Patch.Building_CoreProjector</thingClass>
+    <!-- 直接复用原 mod 的贴图（Textures/2.0/基座.png）与同款绘制参数，不自带美术资源。
+         RimWorld 的 ContentFinder 会在所有已加载 mod 的 Textures/ 下查找，原 mod 是硬依赖且先于本补丁加载。 -->
+    <graphicData>
+      <texPath>2.0/基座</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <drawOffset>(0, 0, 0.5)</drawOffset>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <!-- 必须 MapMeshAndRealTime：DrawAt 里要叠画核心同款的「一束光 + 悬浮球体」。 -->
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <!-- 需要 Tick 做自动收取 / 自动补货；内部有取模节流与预算，不是每 tick 干活。 -->
+    <tickerType>Normal</tickerType>
+    <!-- 投影核心的「数字存储」页签（v0.16）：
+         看被绑定核心的库存清单 + 直接取出到投影核心脚下。
+         注意 inspectorTabs 这里填的是**类名**（ThingDef.inspectorTabs 是 List<Type>），
+         不是 InspectTabDef 的 defName —— 原 mod 的核心 Def 也是这么写的。 -->
+    <inspectorTabs>
+      <li>DigitalStorage.Patch.ITab_ProjectedCore</li>
+    </inspectorTabs>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <size>(3,3)</size>
+    <fillPercent>0.4</fillPercent>
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <WorkToBuild>1600</WorkToBuild>
+      <Mass>40</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <Steel>200</Steel>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>30</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>DigitalStorage_BasicStorage</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

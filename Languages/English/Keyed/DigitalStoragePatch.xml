@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <DigitalStoragePatch_SettingsCategory>Digital Storage · Extension</DigitalStoragePatch_SettingsCategory>
+
+  <DigitalStoragePatch_SectionPerf>Performance</DigitalStoragePatch_SectionPerf>
+  <DigitalStoragePatch_SkipCoreHaulRecalc>Skip core haul-source recalculation (performance; off by default)</DigitalStoragePatch_SkipCoreHaulRecalc>
+  <DigitalStoragePatch_SkipCoreHaulRecalcDesc>When on, a frequent re-check of everything stored in a core is skipped; the more you store, the more frame time it saves. Cost: items already inside the core stay on the haulables list, which may slow auto-collect or make it look like it is not working.</DigitalStoragePatch_SkipCoreHaulRecalcDesc>
+  <DigitalStoragePatch_HaulGhostGuard>Haul checks no longer break on ghost items</DigitalStoragePatch_HaulGhostGuard>
+  <DigitalStoragePatch_HaulGhostGuardDesc>When on, opportunistic-haul checks skip "ghost items" that are no longer on any map or container - the original mod's own guards do not cover this new 1.6 call path, so once a ghost item enters the haulables list, nearby colonists error out and lock up on every job start. Each skipped ghost is logged once per item (to help trace where it came from). Off = original behaviour (the errors return while a ghost exists).</DigitalStoragePatch_HaulGhostGuardDesc>
+
+  <DigitalStoragePatch_FixWasteEmptyJob>Fix "empty waste container" failures</DigitalStoragePatch_FixWasteEmptyJob>
+  <DigitalStoragePatch_FixWasteEmptyJobDesc>Fixes "empty waste container" failing on digital cores: the job never finishing, log spam, or no job at all. When on, waste is carried to a real stockpile; with none available it is dropped nearby and later stored into the core.</DigitalStoragePatch_FixWasteEmptyJobDesc>
+
+  <DigitalStoragePatch_SectionIntervals>Intervals (10–600 ticks)</DigitalStoragePatch_SectionIntervals>
+  <DigitalStoragePatch_AutoRestockInterval>Auto-restock interval: {0} ticks</DigitalStoragePatch_AutoRestockInterval>
+  <DigitalStoragePatch_AutoCollectInterval>Projection auto-collect interval: {0} ticks</DigitalStoragePatch_AutoCollectInterval>
+  <DigitalStoragePatch_ReceivingScanInterval>Receiving shelf scan interval: {0} ticks</DigitalStoragePatch_ReceivingScanInterval>
+  <DigitalStoragePatch_IntervalHint>Smaller = faster response but more overhead; applies immediately. Projection auto-restock also requires "Auto-restock into higher-priority storage" below to be on.</DigitalStoragePatch_IntervalHint>
+
+  <DigitalStoragePatch_SectionProjector>Projection core</DigitalStoragePatch_SectionProjector>
+  <DigitalStoragePatch_AutoRestock>Auto-restock into higher-priority storage (off by default)</DigitalStoragePatch_AutoRestock>
+  <DigitalStoragePatch_AutoRestockDesc>When on, the projection core moves items from the bound core into storage on this map whose priority is higher. Off by default.</DigitalStoragePatch_AutoRestockDesc>
+  <DigitalStoragePatch_RestockSameMap>Auto-restock on same-map projections too (off by default)</DigitalStoragePatch_RestockSameMap>
+  <DigitalStoragePatch_CollectSameMap>Auto-collect on same-map projections too</DigitalStoragePatch_CollectSameMap>
+  <DigitalStoragePatch_CollectSameMapDesc>On by default. When a projector and its bound core are on the same map, the projector still collects loose items on this map. The two merely see the same item one after the other — nothing is ingested twice; turn this off to save that scan.</DigitalStoragePatch_CollectSameMapDesc>
+  <DigitalStoragePatch_RestockSameMapDesc>Off by default. When a projector and its bound core are on the same map, auto-restock is not performed; tick this to let same-map projectors restock as well.</DigitalStoragePatch_RestockSameMapDesc>
+  <DigitalStoragePatch_AutoCollectBatch>Projection auto-collect: at most {0} stacks per pass (0 = follow core research tier 1/5/10)</DigitalStoragePatch_AutoCollectBatch>
+  <DigitalStoragePatch_AutoRestockBatch>Auto-restock: at most {0} stacks per pass (1 = 3.0 semantics; larger fills faster but costs more per pass)</DigitalStoragePatch_AutoRestockBatch>
+  <DigitalStoragePatch_BillCrossMapAnyCore>Bill automation: allow any usable core cross-map (off by default)</DigitalStoragePatch_BillCrossMapAnyCore>
+  <DigitalStoragePatch_BillCrossMapAnyCoreDesc>Default: the craft worker draws cross-map only from a core that a projection core on this map is bound to. Tick this to also let it use cores on other maps when this map has no core.</DigitalStoragePatch_BillCrossMapAnyCoreDesc>
+
+  <DigitalStoragePatch_SectionCapacity>Storage capacity</DigitalStoragePatch_SectionCapacity>
+  <DigitalStoragePatch_CustomCapacity>Custom storage capacity (off by default)</DigitalStoragePatch_CustomCapacity>
+  <DigitalStoragePatch_CustomCapacityDesc>Off by default; while off the mod’s capacities are left completely untouched. When on, the four values below replace the capacity of the matching research tier, applied immediately.</DigitalStoragePatch_CustomCapacityDesc>
+  <DigitalStoragePatch_CapLevel1>Tier 1 (no core research):</DigitalStoragePatch_CapLevel1>
+  <DigitalStoragePatch_CapLevel2>Tier 2 (Core Lv2):</DigitalStoragePatch_CapLevel2>
+  <DigitalStoragePatch_CapLevel3>Tier 3 (Core Lv3):</DigitalStoragePatch_CapLevel3>
+  <DigitalStoragePatch_CapLevel4>Tier 4 (Core Lv4):</DigitalStoragePatch_CapLevel4>
+  <DigitalStoragePatch_CapacityHint>The mod’s own values are 500 / 1000 / 1500 / 3000. These numbers live in the patch’s own settings and are independent of your save.</DigitalStoragePatch_CapacityHint>
+
+  <DigitalStoragePatch_SectionPriority>Work priority</DigitalStoragePatch_SectionPriority>
+  <DigitalStoragePatch_PriorityModDefault>Mod default</DigitalStoragePatch_PriorityModDefault>
+  <DigitalStoragePatch_PriorityModDefaultDesc>Leave the mod’s added work priorities untouched.</DigitalStoragePatch_PriorityModDefaultDesc>
+  <DigitalStoragePatch_PriorityVanillaFirst>Push to bottom of its work type</DigitalStoragePatch_PriorityVanillaFirst>
+  <DigitalStoragePatch_PriorityVanillaFirstDesc>Pushes the mod’s added work priorities to the bottom, so pawns finish other jobs first. Currently this only affects "withdraw from core for construction".</DigitalStoragePatch_PriorityVanillaFirstDesc>
+  <DigitalStoragePatch_SectionPower>Power</DigitalStoragePatch_SectionPower>
+  <DigitalStoragePatch_PowerExempt>Power exemption (off by default)</DigitalStoragePatch_PowerExempt>
+  <DigitalStoragePatch_PowerExemptDesc>When on, storage cores, digital workers and the crafting proxy always consider themselves powered and running — a blackout no longer shuts them down. Actual consumption and supply are unchanged.</DigitalStoragePatch_PowerExemptDesc>
+
+  <DigitalStoragePatch_SectionDebug>Debug</DigitalStoragePatch_SectionDebug>
+  <DigitalStoragePatch_Diagnostics>Diagnostic log (off by default)</DigitalStoragePatch_Diagnostics>
+  <DigitalStoragePatch_DiagnosticsDesc>Log patch internals (binding changes, etc.) to the player log. Enable when troubleshooting.</DigitalStoragePatch_DiagnosticsDesc>
+
+  <DigitalStoragePatch_Projector_Unbound>No core bound. Use "Bind core" to pick one.</DigitalStoragePatch_Projector_Unbound>
+  <DigitalStoragePatch_Projector_CoreLost>The bound core is gone (probably deconstructed). Please rebind.</DigitalStoragePatch_Projector_CoreLost>
+  <DigitalStoragePatch_Projector_CoreDestroyed>The bound core was destroyed.</DigitalStoragePatch_Projector_CoreDestroyed>
+  <DigitalStoragePatch_Projector_CoreAbsent>The bound core is not on a map right now (minified or unloaded).</DigitalStoragePatch_Projector_CoreAbsent>
+  <DigitalStoragePatch_Projector_BoundTo>Bound to: {0}</DigitalStoragePatch_Projector_BoundTo>
+  <DigitalStoragePatch_Projector_CrossMap>Cross-map projection → {0}</DigitalStoragePatch_Projector_CrossMap>
+  <DigitalStoragePatch_Projector_SameMap>Bound to a core on this map: auto-collect runs as usual (restock stays muted by default).</DigitalStoragePatch_Projector_SameMap>
+  <DigitalStoragePatch_Projector_CollectSameMapOffHint>(Same-map projection: auto-collect is turned off in the settings. Enable "Auto-collect on same-map projections too" if you want it here.)</DigitalStoragePatch_Projector_CollectSameMapOffHint>
+  <DigitalStoragePatch_Projector_CoreUnusable>The bound core is currently unusable; the projection is paused.</DigitalStoragePatch_Projector_CoreUnusable>
+  <DigitalStoragePatch_Projector_Bind>Bind core</DigitalStoragePatch_Projector_Bind>
+  <DigitalStoragePatch_Projector_BindDesc>Pick a digital storage core (on this map or another) to project.</DigitalStoragePatch_Projector_BindDesc>
+  <DigitalStoragePatch_Projector_Unbind>Unbind</DigitalStoragePatch_Projector_Unbind>
+  <DigitalStoragePatch_Projector_UnbindDesc>Remove the binding to the current core.</DigitalStoragePatch_Projector_UnbindDesc>
+  <DigitalStoragePatch_Projector_ThisMap> (this map)</DigitalStoragePatch_Projector_ThisMap>
+  <DigitalStoragePatch_Projector_OtherMap> ({0})</DigitalStoragePatch_Projector_OtherMap>
+  <DigitalStoragePatch_Projector_NoCores>No usable digital storage core found.</DigitalStoragePatch_Projector_NoCores>
+  <DigitalStoragePatch_Projector_Option>{0}{1}</DigitalStoragePatch_Projector_Option>
+  <DigitalStoragePatch_Projector_Current> (current)</DigitalStoragePatch_Projector_Current>
+  <DigitalStoragePatch_Projector_NotPrimary>Another projector on this map binds the same core: it handles counting/collecting, this one is only a drop-off point.</DigitalStoragePatch_Projector_NotPrimary>
+  <DigitalStoragePatch_Projector_AutoIngestDesc>Toggle the bound core's auto-ingest. When on, that core absorbs loose items on ITS map, and this projector also absorbs loose items on THIS map (same research tiers as the core).</DigitalStoragePatch_Projector_AutoIngestDesc>
+  <DigitalStoragePatch_Projector_ScanStats>Last auto-collect pass: {0} candidates, {1} taken in</DigitalStoragePatch_Projector_ScanStats>
+  <DigitalStoragePatch_Projector_RestockStats>Auto-restock: {0}; storage on this map with higher priority: {1}; stacks moved so far: {2}</DigitalStoragePatch_Projector_RestockStats>
+  <DigitalStoragePatch_Projector_NoRestockHint>(This map has no storage with a priority higher than the bound core — auto-restock only feeds those. Try setting the target storage to "Important" or "Critical".)</DigitalStoragePatch_Projector_NoRestockHint>
+  <DigitalStoragePatch_Projector_RestockSameMapHint>(Same-map projection: auto-restock is muted. Enable "Auto-restock on same-map projections too" in the patch settings if you want it here.)</DigitalStoragePatch_Projector_RestockSameMapHint>
+  <DigitalStoragePatch_On>on</DigitalStoragePatch_On>
+  <DigitalStoragePatch_Off>off</DigitalStoragePatch_Off>
+
+  <DigitalStoragePatch_Shelf_Auto>Auto: uses a usable digital core on this map (use "Bind core" to pick one)</DigitalStoragePatch_Shelf_Auto>
+  <DigitalStoragePatch_Shelf_AutoOption>Auto (usable core on this map)</DigitalStoragePatch_Shelf_AutoOption>
+  <DigitalStoragePatch_Shelf_BoundTo>Receiving into: {0}</DigitalStoragePatch_Shelf_BoundTo>
+  <DigitalStoragePatch_Shelf_CoreLost>The chosen core is gone (probably deconstructed). Rebind, or switch to Auto.</DigitalStoragePatch_Shelf_CoreLost>
+  <DigitalStoragePatch_Shelf_CoreUnusable>The chosen core is currently unusable (unpowered, ...); falling back to auto selection.</DigitalStoragePatch_Shelf_CoreUnusable>
+  <DigitalStoragePatch_Shelf_CrossMap>Cross-map receiving → {0}</DigitalStoragePatch_Shelf_CrossMap>
+  <DigitalStoragePatch_Shelf_Stats>Last scan: {0} stacks taken in, {1} left on the shelf ({2} refused by the core filter, {3} no room in core)</DigitalStoragePatch_Shelf_Stats>
+  <DigitalStoragePatch_Shelf_FilterHint>Some items are refused by the core filter. The shelf's accepted items follow the core, so change the filter on the core itself.</DigitalStoragePatch_Shelf_FilterHint>
+  <DigitalStoragePatch_Shelf_Bind>Bind core</DigitalStoragePatch_Shelf_Bind>
+  <DigitalStoragePatch_Shelf_BindDesc>Pick a specific digital storage core to receive from this shelf. Leave unset to auto-select a usable core on this map.</DigitalStoragePatch_Shelf_BindDesc>
+  <DigitalStoragePatch_Shelf_Unbind>Switch to Auto</DigitalStoragePatch_Shelf_Unbind>
+  <DigitalStoragePatch_Shelf_UnbindDesc>Clear the manual choice and go back to auto core selection.</DigitalStoragePatch_Shelf_UnbindDesc>
+
+  <DigitalStoragePatch_SectionUI>UI</DigitalStoragePatch_SectionUI>
+  <DigitalStoragePatch_UI_CraftButton>Show the bottom-bar "Craft automation" button (off by default)</DigitalStoragePatch_UI_CraftButton>
+  <DigitalStoragePatch_UI_CraftButtonDesc>When on, the bottom bar shows the "Craft automation" button. Off by default (it stops taking up space); the same panel can still be opened from a crafting proxy building, so nothing is lost. Applies immediately, no restart.</DigitalStoragePatch_UI_CraftButtonDesc>
+  <DigitalStoragePatch_UI_WithdrawPicker>Use the enhanced picker for "Withdraw from digital storage…"</DigitalStoragePatch_UI_WithdrawPicker>
+  <DigitalStoragePatch_UI_WithdrawPickerDesc>When on, the "withdraw from digital storage" right-click menu opens a picker with icons, groups, search and a take-all button; off returns to the original mod’s two-level menu. Takes effect immediately.</DigitalStoragePatch_UI_WithdrawPickerDesc>
+
+  <!-- Enhanced withdraw picker (P). DS_WithdrawToSpot / DS_WithdrawBtn / DS_Kinds / DS_Group_* reuse the mod's own keys. -->
+  <DigitalStoragePatch_WithdrawPicker_Hint>Click "Withdraw" to pick an amount, or "Take max" to order everything the colonist can carry. The list is a snapshot taken when opened/refreshed; items on remote maps show a remote count at the end of the row (hover a row for the core names), and the colonist will travel there to fetch them.</DigitalStoragePatch_WithdrawPicker_Hint>
+  <DigitalStoragePatch_WithdrawPicker_Refresh>Refresh</DigitalStoragePatch_WithdrawPicker_Refresh>
+  <DigitalStoragePatch_WithdrawPicker_Empty>No withdrawable items in the cores.</DigitalStoragePatch_WithdrawPicker_Empty>
+  <DigitalStoragePatch_WithdrawPicker_TakeAll>Take max</DigitalStoragePatch_WithdrawPicker_TakeAll>
+  <DigitalStoragePatch_WithdrawPicker_CantCarry>This colonist cannot carry any of that item right now.</DigitalStoragePatch_WithdrawPicker_CantCarry>
+  <DigitalStoragePatch_WithdrawPicker_Took>Ordered: {0} x {1}. The colonist will fetch it.</DigitalStoragePatch_WithdrawPicker_Took>
+  <DigitalStoragePatch_WithdrawPicker_TookFail>No usable {0} found (stock may have changed) - refresh and try again.</DigitalStoragePatch_WithdrawPicker_TookFail>
+  <DigitalStoragePatch_WithdrawPicker_SourceMixed>this map {0} + remote {1}</DigitalStoragePatch_WithdrawPicker_SourceMixed>
+  <DigitalStoragePatch_WithdrawPicker_SourceRemote>remote {0}</DigitalStoragePatch_WithdrawPicker_SourceRemote>
+  <DigitalStoragePatch_WithdrawPicker_RemoteTip>Remote sources: {0}</DigitalStoragePatch_WithdrawPicker_RemoteTip>
+
+  <DigitalStoragePatch_ProjITab_Capacity>Stock {0} / {1} stacks ({2} kinds)</DigitalStoragePatch_ProjITab_Capacity>
+  <DigitalStoragePatch_ProjITab_BoundTo>Projecting: {0}</DigitalStoragePatch_ProjITab_BoundTo>
+  <DigitalStoragePatch_ProjITab_Unbound>No core bound yet - right-click this building to pick one. Once bound, this tab shows the stock of that core and can take items out right here.</DigitalStoragePatch_ProjITab_Unbound>
+  <DigitalStoragePatch_ProjITab_CoreUnusable>The bound core is currently unusable (unpowered, ...) - its items are still there but cannot be taken out.</DigitalStoragePatch_ProjITab_CoreUnusable>
+
+  <DigitalStoragePatch_SectionTrade>Trading</DigitalStoragePatch_SectionTrade>
+  <DigitalStoragePatch_TradeFromCore>Caravan / settlement trading uses digital core stock (off by default)</DigitalStoragePatch_TradeFromCore>
+  <DigitalStoragePatch_TradeFromCoreDesc>When on, visiting traders and orbital trade ships list items held in digital cores on other maps as sellable.</DigitalStoragePatch_TradeFromCoreDesc>
+  <DigitalStoragePatch_SectionBattery>Digital battery</DigitalStoragePatch_SectionBattery>
+  <DigitalStoragePatch_Battery_Capacity>Per-battery capacity (Wd):</DigitalStoragePatch_Battery_Capacity>
+  <DigitalStoragePatch_Battery_TargetPct>Balance line: {0}% of capacity (above it charges into the digital ledger, below it draws back)</DigitalStoragePatch_Battery_TargetPct>
+  <DigitalStoragePatch_Battery_Interval>Balance interval (ticks, 30-10000):</DigitalStoragePatch_Battery_Interval>
+  <DigitalStoragePatch_Battery_Hint>All digital batteries share one digital ledger, so cross-map power transfer is automatic: surplus on one map automatically covers a deficit on another, 1:1 with no loss. Capacity changes apply immediately to batteries already built; lowering it pushes the excess into the ledger on the next balance pass instead of losing it. Each battery can turn auto-balance off individually.</DigitalStoragePatch_Battery_Hint>
+  <DigitalStoragePatch_Battery_Shared>Digital ledger charge: {0}</DigitalStoragePatch_Battery_Shared>
+  <DigitalStoragePatch_Battery_Balance>Auto-balance: {0}</DigitalStoragePatch_Battery_Balance>
+  <DigitalStoragePatch_Battery_BalanceToggle>Auto-balance</DigitalStoragePatch_Battery_BalanceToggle>
+  <DigitalStoragePatch_Battery_BalanceToggleDesc>When on, energy above the balance line goes into the shared digital ledger and shortfalls are drawn back. When off, THIS battery stops balancing entirely and no longer touches the ledger (other digital batteries are unaffected).</DigitalStoragePatch_Battery_BalanceToggleDesc>
+
+  <!-- Craft worker -->
+  <DigitalStoragePatch_SectionCraftWorker>Craft worker</DigitalStoragePatch_SectionCraftWorker>
+  <DigitalStoragePatch_CraftAnyBench>Recognize benches from other mods</DigitalStoragePatch_CraftAnyBench>
+  <DigitalStoragePatch_CraftAnyBenchDesc>The craft worker only recognized vanilla benches. With a stove, kitchen or workbench added by another mod, the recipe can be picked in the panel but the worker always reports missing material / blocked and never starts. When on, those benches are accepted as well. (Off = original mod behaviour)</DigitalStoragePatch_CraftAnyBenchDesc>
+  <DigitalStoragePatch_CraftReclaimIdle>Release the bench when "Do until you have X" is satisfied</DigitalStoragePatch_CraftReclaimIdle>
+  <DigitalStoragePatch_CraftReclaimIdleDesc>When on, a recipe set to "keep N" gives the workbench back once the target is met (the item in progress still finishes) and picks it up again when the count drops - otherwise the proxy holds the bench and later recipes never get a turn. Off = vanilla.</DigitalStoragePatch_CraftReclaimIdleDesc>
+  <DigitalStoragePatch_ProxyWorkerNoThink>Stop vanilla AI from assigning jobs to proxy workers</DigitalStoragePatch_ProxyWorkerNoThink>
+  <DigitalStoragePatch_ProxyWorkerNoThinkDesc>When on, the digital workers and the craft proxy no longer spam the log with errors, and their work is unaffected. Off = original behaviour.</DigitalStoragePatch_ProxyWorkerNoThinkDesc>
+  <DigitalStoragePatch_WorkerCleanBackstory>Stop proxy workers from rolling an unusable backstory</DigitalStoragePatch_WorkerCleanBackstory>
+  <DigitalStoragePatch_WorkerCleanBackstoryDesc>When on, the digital workers and the craft proxy no longer report insufficient skill or fail to do certain work. Off = original behaviour.</DigitalStoragePatch_WorkerCleanBackstoryDesc>
+  <DigitalStoragePatch_WithdrawRespectReservations>Only one colonist fetches material per construction site</DigitalStoragePatch_WithdrawRespectReservations>
+  <DigitalStoragePatch_WithdrawRespectReservationsDesc>When on, only one colonist at a time fetches construction material from the digital cores for the same site, instead of several colonists each taking a full load. Off = original behaviour.</DigitalStoragePatch_WithdrawRespectReservationsDesc>
+  <DigitalStoragePatch_WithdrawCapToNeed>Construction deliveries never exceed what is needed</DigitalStoragePatch_WithdrawCapToNeed>
+  <DigitalStoragePatch_WithdrawCapToNeedDesc>When on, material a colonist delivers to a construction site never exceeds what that site still needs; any surplus is returned to the digital cores right away. Off = original behaviour.</DigitalStoragePatch_WithdrawCapToNeedDesc>
+  <DigitalStoragePatch_ConstructPickupAmountFix>Construction pickup no longer empties the cores</DigitalStoragePatch_ConstructPickupAmountFix>
+  <DigitalStoragePatch_ConstructPickupAmountFixDesc>When on, only the amount a construction site actually needs is taken from the digital cores, instead of hauling whole stacks out of the core. Off = original behaviour.</DigitalStoragePatch_ConstructPickupAmountFixDesc>
+
+  <!-- v0.60 · FIX-11 / FIX-12 -->
+  <DigitalStoragePatch_CraftAddDuplicate>Allow duplicate tasks of the same recipe (experimental, off by default)</DigitalStoragePatch_CraftAddDuplicate>
+  <DigitalStoragePatch_CraftAddDuplicateDesc>When on, recipes already added stay clickable in the add-recipe panel, so one crafting proxy can hold several independent tasks of the same recipe (e.g. "cut stone blocks"), each with its own mode and count. Known limitation: duplicate tasks share the same recipe and cannot pick different ingredients (e.g. "this one granite, that one marble"). Off = original behaviour (one task per recipe).</DigitalStoragePatch_CraftAddDuplicateDesc>
+  <DigitalStoragePatch_CraftFairBenchAlloc>Allocate workbenches by need, shared fairly between tasks (experimental, off by default)</DigitalStoragePatch_CraftFairBenchAlloc>
+  <DigitalStoragePatch_CraftFairBenchAllocDesc>When on, a crafting proxy only occupies as many workbenches as a task actually needs (one per item in flight), and several tasks share the benches in range; a task that got no bench will eventually receive one freed from the more occupied tasks, without interrupting anything in progress. With no competition it can still use all benches in parallel. Off = original behaviour (first come, first served - it takes everything).</DigitalStoragePatch_CraftFairBenchAllocDesc>
+  <DigitalStoragePatch_CraftIngredientClaims>Parallel crafting no longer resets each other's progress (experimental, off by default)</DigitalStoragePatch_CraftIngredientClaims>
+  <DigitalStoragePatch_CraftIngredientClaimsDesc>When on, parallel crafting lines of the same recipe each use their own ingredient stacks - originally they share one stack, so whenever one line finishes, the others lose their progress and restart from 0% (parallel crafting collapses into serial). Known limitation: if only one stack of an ingredient exists, later lines wait for the current one to finish (serial, but no resets). Off = original behaviour.</DigitalStoragePatch_CraftIngredientClaimsDesc>
+
+  <DigitalStoragePatch_CraftWindowNonModal>Allow time controls while the craft panel is open</DigitalStoragePatch_CraftWindowNonModal>
+  <DigitalStoragePatch_CraftWindowNonModalDesc>When on, the craft automation window no longer takes exclusive mouse and keyboard control, so you can change game speed, use 1/2/3/4 and click the bottom buttons; the cost is that clicking the map outside the window passes through (which may clear your selection). Off = vanilla.</DigitalStoragePatch_CraftWindowNonModalDesc>
+
+  <DigitalStoragePatch_CraftUftRecipes>Allow recipes that need an unfinished item (experimental, off by default)</DigitalStoragePatch_CraftUftRecipes>
+  <DigitalStoragePatch_CraftUftRecipesDesc>When on, recipes that need an "unfinished thing" (apparel, weapons, gear) can also be run by the crafting proxy, which produces the finished item directly. Known limit: if a half-finished item of the same recipe is already on the map the recipe shows as blocked - deal with the half-finished item. Off by default; craft one item first to confirm the result. Off = vanilla.</DigitalStoragePatch_CraftUftRecipesDesc>
+
+  <!-- Core storage -->
+  <DigitalStoragePatch_SectionCoreStorage>Storage core</DigitalStoragePatch_SectionCoreStorage>
+  <DigitalStoragePatch_KeepCoreFilterOnLoad>Keep the core's storage filter on load</DigitalStoragePatch_KeepCoreFilterOnLoad>
+  <DigitalStoragePatch_KeepCoreFilterOnLoadDesc>When on, loading a save no longer changes the core storage filter - vanilla resets the "weapons" category through an internal switch on every load, undoing your ticks. Off = vanilla.</DigitalStoragePatch_KeepCoreFilterOnLoadDesc>
+
+  <DigitalStoragePatch_RitualOfferingFromCore>Psychic rituals can take offerings from cores</DigitalStoragePatch_RitualOfferingFromCore>
+  <DigitalStoragePatch_RitualOfferingFromCoreDesc>When on, psychic rituals that need offerings (Anomaly) count offerings kept in the core and can take them from there. Off = vanilla.</DigitalStoragePatch_RitualOfferingFromCoreDesc>
+
+  <DigitalStoragePatch_FeedPatientReservable>Feed-patient booking fix</DigitalStoragePatch_FeedPatientReservable>
+  <DigitalStoragePatch_FeedPatientReservableDesc>When on, fixes feed-patient jobs that never start: if the chosen food is already taken by someone else, a fresh one is taken from the core instead. On by default; it only acts when the job would have failed anyway, so a feeding that would have worked is never made worse. Off = vanilla.</DigitalStoragePatch_FeedPatientReservableDesc>
+
+  <DigitalStoragePatch_CoreFoodScoringMood>Food picking accounts for mood</DigitalStoragePatch_CoreFoodScoringMood>
+  <DigitalStoragePatch_CoreFoodScoringMoodDesc>When on, taking food from the core also weighs how much the meal will hurt mood, so a more suitable meal is picked first. On by default. Off = original mod behaviour.</DigitalStoragePatch_CoreFoodScoringMoodDesc>
+
+  <DigitalStoragePatch_GiveItemsFromCore>Supplying refugees / visitors can use core stock</DigitalStoragePatch_GiveItemsFromCore>
+  <DigitalStoragePatch_GiveItemsFromCoreDesc>When on, goods asked for by refugees or visitors can be taken from the core and delivered when the map has none (nothing changes when the map already has them). Off = vanilla.</DigitalStoragePatch_GiveItemsFromCoreDesc>
+
+  <DigitalStoragePatch_InventoryStockFromCore>Carry targets can be refilled from core stock</DigitalStoragePatch_InventoryStockFromCore>
+  <DigitalStoragePatch_InventoryStockFromCoreDesc>When on, carry targets can also be filled from the core stock (nothing changes when the map already has the goods). Off = vanilla.</DigitalStoragePatch_InventoryStockFromCoreDesc>
+
+  <DigitalStoragePatch_BloodTransfusionFromCore>Blood transfusion counts hemogen packs in the core</DigitalStoragePatch_BloodTransfusionFromCore>
+  <DigitalStoragePatch_BloodTransfusionFromCoreDesc>When on, the blood transfusion operation stays available when the map has no hemogen packs and the core does, and the pack count includes those in the core. Off = vanilla.</DigitalStoragePatch_BloodTransfusionFromCoreDesc>
+
+  <DigitalStoragePatch_FoodRestrictionAlign>Align eating with food rules beyond the diet policy (experimental, off by default)</DigitalStoragePatch_FoodRestrictionAlign>
+  <DigitalStoragePatch_FoodRestrictionAlignDesc>When on, taking food from the core is also checked against the vanilla royal title food rules and venerated-animal taboos (stricter only, never looser). Side effect: if a feeding is blocked the food briefly lies on the ground, then gets auto-collected again. Off = original mod behaviour.</DigitalStoragePatch_FoodRestrictionAlignDesc>
+  <!-- v0.45 · Item visibility fallback (2) -->
+  <DigitalStoragePatch_SectionVisibilityB>Core inventory usability</DigitalStoragePatch_SectionVisibilityB>
+  <DigitalStoragePatch_HemogenFeedFromCore>Doctors can take hemogen packs from the core</DigitalStoragePatch_HemogenFeedFromCore>
+  <DigitalStoragePatch_HemogenFeedFromCoreDesc>When on, "administer hemogen" also works when the map has no hemogen packs and the core does. Off = vanilla.</DigitalStoragePatch_HemogenFeedFromCoreDesc>
+  <DigitalStoragePatch_HemogenPackFromCore>Hemogen-dependent pawns can take hemogen from the core</DigitalStoragePatch_HemogenPackFromCore>
+  <DigitalStoragePatch_HemogenPackFromCoreDesc>When on, a pawn can take hemogen packs from the core to restore hemogen. Prisoners can take them too (known). Off = vanilla.</DigitalStoragePatch_HemogenPackFromCoreDesc>
+  <DigitalStoragePatch_BingeDrugFromCore>Drug binges can take drugs from the core</DigitalStoragePatch_BingeDrugFromCore>
+  <DigitalStoragePatch_BingeDrugFromCoreDesc>When on, a pawn entering a drug binge can take the drug from the core. Off = vanilla.</DigitalStoragePatch_BingeDrugFromCoreDesc>
+  <DigitalStoragePatch_MoveDrugsToInventoryFromCore>Carried medicine can be filled from the core</DigitalStoragePatch_MoveDrugsToInventoryFromCore>
+  <DigitalStoragePatch_MoveDrugsToInventoryFromCoreDesc>When on, carried medicine amounts can be filled from the core stock. Off = vanilla.</DigitalStoragePatch_MoveDrugsToInventoryFromCoreDesc>
+  <DigitalStoragePatch_TurretSuppliesFromCore>Turrets can be restocked from the core</DigitalStoragePatch_TurretSuppliesFromCore>
+  <DigitalStoragePatch_TurretSuppliesFromCoreDesc>When on, a turret being operated can take its shells (and fuel) from the core. Off = vanilla.</DigitalStoragePatch_TurretSuppliesFromCoreDesc>
+  <DigitalStoragePatch_FillBarrelFromCore>Wort can be taken from the core into a fermenting barrel</DigitalStoragePatch_FillBarrelFromCore>
+  <DigitalStoragePatch_FillBarrelFromCoreDesc>When on, wort can be taken from the core and poured into a fermenting barrel; other containers using the same mechanic should work too. Off = vanilla.</DigitalStoragePatch_FillBarrelFromCoreDesc>
+  <DigitalStoragePatch_DyeFromCore>Dyeing and painting can use the core dye</DigitalStoragePatch_DyeFromCore>
+  <DigitalStoragePatch_DyeFromCoreDesc>When on, hair dyeing, recolouring worn apparel and painting buildings or floors can take dye from the core. Off = vanilla.</DigitalStoragePatch_DyeFromCoreDesc>
+  <DigitalStoragePatch_MonumentStuffFromCore>The monument material menu sees the core</DigitalStoragePatch_MonumentStuffFromCore>
+  <DigitalStoragePatch_MonumentStuffFromCoreDesc>When on, the monument blueprint material menu also recognises materials kept in the core. Off = vanilla.</DigitalStoragePatch_MonumentStuffFromCoreDesc>
+  <DigitalStoragePatch_XenogermFromCore>The xenogerm work flow can see the core</DigitalStoragePatch_XenogermFromCore>
+  <DigitalStoragePatch_XenogermFromCoreDesc>When on, assembling, hauling and implanting xenogerms work with archites and xenogerms kept in the core. Off = vanilla.</DigitalStoragePatch_XenogermFromCoreDesc>
+  <DigitalStoragePatch_BiosculpterFromCore>Biosculpters can be fed from the core</DigitalStoragePatch_BiosculpterFromCore>
+  <DigitalStoragePatch_BiosculpterFromCoreDesc>When on, a biosculpter pod can recognise and draw nutrition from the core. Off = vanilla.</DigitalStoragePatch_BiosculpterFromCoreDesc>
+  <DigitalStoragePatch_WardenHemogenFromCore>Wardens can hand out hemogen from the core</DigitalStoragePatch_WardenHemogenFromCore>
+  <DigitalStoragePatch_WardenHemogenFromCoreDesc>When on, a warden can take a hemogen pack from the core to give a hemogen-dependent prisoner. Off = vanilla.</DigitalStoragePatch_WardenHemogenFromCoreDesc>
+  <DigitalStoragePatch_GatheringEatFromCore>Gathering meals can use the core</DigitalStoragePatch_GatheringEatFromCore>
+  <DigitalStoragePatch_GatheringEatFromCoreDesc>When on, a pawn can take food from the core to eat at a gathering when none is nearby. Off = vanilla.</DigitalStoragePatch_GatheringEatFromCoreDesc>
+  <DigitalStoragePatch_EatRandomFromCore>Animals eating at random can take food from the core (experimental, off by default)</DigitalStoragePatch_EatRandomFromCore>
+  <DigitalStoragePatch_EatRandomFromCoreDesc>When on, colony animals can also eat things kept in the core. Experimental, off by default: the test is loose and hard to control, so animals may eat things you would rather they did not. Off = vanilla.</DigitalStoragePatch_EatRandomFromCoreDesc>
+  <DigitalStoragePatch_AmmoFromCore>Reloading can use the core ammo</DigitalStoragePatch_AmmoFromCore>
+  <DigitalStoragePatch_AmmoFromCoreDesc>When on, reloadable weapons and gear can take ammo from the core. Off = vanilla.</DigitalStoragePatch_AmmoFromCoreDesc>
+  <DigitalStoragePatch_ShardFromCore>Shard checks can see the core</DigitalStoragePatch_ShardFromCore>
+  <DigitalStoragePatch_ShardFromCoreDesc>When on, shards kept in the core count for shutting down a golden cube or an obelisk. Known limit: core shards cannot be reachability-checked, so an option may rarely appear and then not be takeable. Off = vanilla.</DigitalStoragePatch_ShardFromCoreDesc>
+  <DigitalStoragePatch_FixedIngredientFromCore>Fixed-ingredient hauling can use the core</DigitalStoragePatch_FixedIngredientFromCore>
+  <DigitalStoragePatch_FixedIngredientFromCoreDesc>When on, obelisk shutdown and war queen resupply can draw materials from the core. Best turned on together with the shard item above. Off = vanilla.</DigitalStoragePatch_FixedIngredientFromCoreDesc>
+
+  <DigitalStoragePatch_CoreRejectUnfinished>Cores refuse "unfinished" items</DigitalStoragePatch_CoreRejectUnfinished>
+  <DigitalStoragePatch_CoreRejectUnfinishedDesc>When on, the core never accepts unfinished things (e.g. half-made apparel or weapons, which could be swallowed otherwise): the category is unticked when built and on load, and incoming ones are refused again. Off = vanilla.</DigitalStoragePatch_CoreRejectUnfinishedDesc>
+
+  <DigitalStoragePatch_Core_Rename>Rename core</DigitalStoragePatch_Core_Rename>
+  <DigitalStoragePatch_Core_RenameDesc>Rename this digital storage core. Once named, that name is used everywhere on the map. Save it empty to clear the name.</DigitalStoragePatch_Core_RenameDesc>
+  <DigitalStoragePatch_Core_RenameBoundDesc>Rename the BOUND core.</DigitalStoragePatch_Core_RenameBoundDesc>
+  <DigitalStoragePatch_Core_RenamePrompt>Enter a name for this core:</DigitalStoragePatch_Core_RenamePrompt>
+  <DigitalStoragePatch_Core_RenameHint>Leave it empty and confirm to clear the name.</DigitalStoragePatch_Core_RenameHint>
+  <DigitalStoragePatch_Core_NameIs>Core name: {0}</DigitalStoragePatch_Core_NameIs>
+  <DigitalStoragePatch_Confirm>Confirm</DigitalStoragePatch_Confirm>
+  <DigitalStoragePatch_Cancel>Cancel</DigitalStoragePatch_Cancel>
+
+  <!-- v0.35 · Hauling compatibility -->
+  <DigitalStoragePatch_AvoidCoreDirectHaul>With shelves available, don't haul straight into the core (off by default)</DigitalStoragePatch_AvoidCoreDirectHaul>
+  <DigitalStoragePatch_AvoidCoreDirectHaulDesc>Recommended with hauling mods such as Pick Up And Haul or Hauler’s Dream. A core can only be used by one pawn at a time, so hauling degrades to "one stack at a time while everyone else waits". When on, pawns deliver to a receiving shelf whenever one can take the item (several pawns can feed it at once) and the shelf moves the goods into the core; without an available shelf they still use the core directly. Off = vanilla.</DigitalStoragePatch_AvoidCoreDirectHaulDesc>
+
+  <!-- v0.36 · Performance -->
+  <DigitalStoragePatch_ShelfSkipIngestNotify>No immediate full re-check after shelf intake</DigitalStoragePatch_ShelfSkipIngestNotify>
+  <DigitalStoragePatch_ShelfSkipIngestNotifyDesc>On by default: after the shelf stores something, the hauling system no longer re-checks every item in the core right away - vanilla already does the same thing periodically, so doing it again immediately is wasted work. Cost: a freshly stored item is seen by the hauling system at most one cycle later. Off = check right after storing.</DigitalStoragePatch_ShelfSkipIngestNotifyDesc>
+
+  <!-- v0.37 · Trade payment supplement -->
+  <DigitalStoragePatch_TradePayFromCore>Payment can take silver from the core</DigitalStoragePatch_TradePayFromCore>
+  <DigitalStoragePatch_TradePayFromCoreDesc>On by default: when the silver on the ground near the trade beacon is not enough, the rest is taken from the core (ground first, then core). The original mod only counts the core when showing how much silver you have, so payment could fail and flash red while the UI said you had enough. Works for vanilla orbital trade too. Off = vanilla.</DigitalStoragePatch_TradePayFromCoreDesc>
+
+  <!-- v0.38 · Mod compatibility (special recognition logic in other mods) -->
+  <DigitalStoragePatch_SectionModCompat>Mod compatibility</DigitalStoragePatch_SectionModCompat>
+  <DigitalStoragePatch_BamMaterialsFromCore>Architect menu also sees materials inside the core</DigitalStoragePatch_BamMaterialsFromCore>
+  <DigitalStoragePatch_BamMaterialsFromCoreDesc>On by default: lets Better Architect Menu’s floor page and default material picker see materials kept in the core - with materials only in a core they are otherwise missing from the categories, so floors cannot be built. No other judgement of that mod is changed. No effect if the mod is not installed. Off = keep its original behaviour.</DigitalStoragePatch_BamMaterialsFromCoreDesc>
+</LanguageData>

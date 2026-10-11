@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <DigitalStoragePatch_ReceivingShelf.label>Digital Receiving Shelf</DigitalStoragePatch_ReceivingShelf.label>
+  <DigitalStoragePatch_ReceivingShelf.description>The receiving end of digital storage. Items placed on this shelf are automatically taken into the digital storage core — they are never taken back out.
+
+It uses the vanilla storage system, so colonists and any hauling mod will drop items onto it normally; you just throw things on the shelf. The accepted item types match the digital core (it follows the core's filter, and re-syncs when you change that filter). Anything the core cannot accept — filter mismatch or the core is full — simply stays on the shelf.
+
+By default it picks a usable digital core on this map automatically. You can also use "Bind core" to name a specific one (including a core on another map that a projection core has authorized).</DigitalStoragePatch_ReceivingShelf.description>
+
+</LanguageData>

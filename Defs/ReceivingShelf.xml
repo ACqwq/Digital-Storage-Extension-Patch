@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 数字收货架（补丁新增建筑）
+
+       一个真正的原版货架（Building_Storage）：殖民者与各类搬运 mod 会把物品正常放上来，
+       然后由 Building_ReceivingShelf 按间隔转进数字核心。**从不反向取出。**
+
+       准入规则（筛选）由代码在建成时与核心改筛选时同步，见
+       Source/Building_ReceivingShelf.cs 与 Source/Patch_ReceivingShelfFilter.cs；
+       Def 里的 defaultStorageSettings 只是"还没同步之前的空壳"。 -->
+  <ThingDef ParentName="DigitalStorage_BuildingBase">
+    <defName>DigitalStoragePatch_ReceivingShelf</defName>
+    <label>数字收货架</label>
+    <description>数字存储的收货口：放在上面的物品会被自动收入数字核心，不会反向取出。
+
+收货口走原版储存机制，理论上殖民者与各类 mod 都能正常把物品放上来。可收什么由数字核心的筛选决定（核心改筛选，这里自动同步）；核心装不下或筛选不允许的物品会留在架上。
+
+建成后默认自动选用本图可用的数字核心，也可以用「绑定核心」指定一个。</description>
+    <thingClass>DigitalStorage.Patch.Building_ReceivingShelf</thingClass>
+
+    <!-- 自带贴图（Textures/数字收货架.png，沿用 3.0 补丁那一张）。 -->
+    <graphicData>
+      <texPath>数字收货架</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+    <size>(1,1)</size>
+    <fillPercent>0.8</fillPercent>
+    <!-- 需要 Tick 做"架上 → 核心"的搬运；内部按 receivingScanInterval 取模节流。 -->
+    <tickerType>Normal</tickerType>
+
+    <building>
+      <!-- ★★ 绝不要写 <isEdifice>false</isEdifice>！
+           RimWorld 的"一格能放几堆"是这样判的（1.6 反编译核实）：
+               GridsUtility.GetMaxItemsAllowedInCell(c, map) => c.GetEdifice(map)?.MaxItemsInCell ?? 1
+               Building.MaxItemsInCell                    => def.building.maxItemsInCell
+           而 Building.SpawnSetup 只在 `def.IsEdifice()` 为真时才把自己注册进 map.edificeGrid。
+           ⇒ isEdifice=false 时 GetEdifice() 返回 null，容量**恒为 1 堆**（第一版就是这么写错的）。
+           保持默认 true（原版货架 FurnitureBase 也没改这个值，所以原版货架是 3 堆/格）。 -->
+      <!-- ★★ 必须声明 Blueprint_Storage，否则建成瞬间必崩（NullReferenceException）。
+           原版链路（1.6 反编译逐条核实）：
+             ThingDefGenerator_Buildings.NewBlueprintDef_Thing ⇒ 蓝图.thingClass = def.building.blueprintClass
+             BuildingProperties.blueprintClass                ⇒ 默认 Blueprint_Build
+             Blueprint_Storage.MakeSolidThing  ⇒ frame.storageSettings = new StorageSettings(); CopyFrom(...)
+             Blueprint_Build.MakeSolidThing    ⇒ ★不搬运，frame.storageSettings 保持 null
+             Frame.CompleteConstruction        ⇒ if (thing is IStorageGroupMember) {
+                                                       storageGroupMember.SetStorageGroup(storageGroup);
+                                                       storageGroupMember.ThingStoreSettings.CopyFrom(storageSettings);
+                                                   }                                        ← 无判空
+             StorageSettings.CopyFrom(other)   ⇒ filter.CopyAllowancesFrom(other.filter)    ← NRE
+           收货架是 Building_Storage（必然实现 IStorageGroupMember），
+           蓝图若不是 Blueprint_Storage，frame.storageSettings 就是 null ⇒ 每建成一次必崩一次。
+           原版货架写的正是 Blueprint_Storage（Buildings_Furniture.xml:1550）。 -->
+      <blueprintClass>Blueprint_Storage</blueprintClass>
+
+      <!-- 容量 = maxItemsInCell（**每格**几堆；1×1 占地 ⇒ 总共 30 堆）。
+           原版货架是 3；收货架是"倒货口"，要能吃下批量搬运 mod 一次倒过来的一堆货。
+
+           ★★ 提高这个值**不会**增加扫描开销（v0.34 核实）：
+           扫描走的是 `SlotGroup.HeldThings`，它的成本是
+             「格子数 × 该格上的 Thing 数」—— 而`maxItemsInCell` 只决定"允许堆多少"，
+             不决定"有几个格子"。收货架是 1×1 ⇒ 恒定 1 格。
+           空架时：`HeldThings` 只遍历 1 个格子里的 1~2 个 Thing（货架自己），
+             全被 `def.EverStorable(false)` 挡掉 ⇒ heldBuffer.Count == 0 ⇒ **提前返回**，
+             连核心收集与筛选同步都不会做。
+           真正会变贵的只有"核心满仓"这一条：`Building_StorageCore.Accepts`
+             在满仓时会跑 `HasRoomInExistingStack`（遍历核心全部条目）；
+             上限从 10 提到 30 意味着一次扫描最多多判 20 件 ⇒
+             `Source/Building_ReceivingShelf.cs` 里加了"本轮遇到装不下就提前收手"来兜住。 -->
+      <maxItemsInCell>30</maxItemsInCell>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <disallowNotEverStorable>true</disallowNotEverStorable>
+          <categories />
+        </filter>
+      </defaultStorageSettings>
+    </building>
+
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+
+    <researchPrerequisites>
+      <li>DigitalStorage_BasicStorage</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

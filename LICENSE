@@ -1,0 +1,79 @@
+# 数字存储·扩展补丁 — 许可协议
+# Digital Storage Extension Patch — License
+
+版本 1.0（2026-10-11）· 等效于原模组「DS License」的「非商用 + 署名 + 相同方式共享」协议
+Version 1.0 (2026-10-11) · Equivalent to the upstream "DS License" (non-commercial + attribution + share-alike)
+
+版权所有 (C) 2026 AC酱qwq —— 本补丁（Digital Storage Extension Patch）
+Copyright (c) 2026 AC酱qwq — this patch project
+
+原模组版权 (C) 2026 Cagier.阳 (CagierAsh123) —— 《数字存储 Digital Storage》
+Upstream mod copyright (c) 2026 Cagier.阳 (CagierAsh123) — "Digital Storage"
+原模组主仓库 / Upstream repository: https://github.com/CagierAsh123/Digital-Storage
+
+一句话摘要：**非商用 + 必须署名（原模组与本补丁的作者与仓库）+ 衍生作品必须开源并以等效协议发布。**
+Summary: **non-commercial + attribution (both upstream and this patch) + derivatives must be open
+source and released under an equivalent license.**
+
+【适用对象】
+本协议覆盖《数字存储·扩展补丁 / Digital Storage Extension Patch》及其全部源码与文本。
+本补丁是《数字存储 Digital Storage》的第三方扩展（Harmony 补丁），**不包含原模组的任何代码或资产**；
+使用本补丁需自行获取原模组。
+
+【允许】
+- 自由使用、修改、复制、分发本补丁（非商用）
+- 基于本补丁制作衍生作品（非商用）
+- 参考、借鉴、引用本补丁代码（非商用）
+
+【必须遵守】
+1. **禁止商用**：不得以任何形式利用本补丁（或其衍生作品）获取直接或间接的商业利益，包括但不限于：
+   付费下载、订阅收费、打赏 / 捐赠墙、广告收入、捆绑付费产品、付费整合包 / 服务器特权等。
+2. **署名与来源**：分发、修改、衍生、参考本补丁的任何作品（含代码片段），必须同时清晰标注：
+   （a）原模组作者 **Cagier.阳 / CagierAsh123** 与主仓库
+        https://github.com/CagierAsh123/Digital-Storage
+   （b）本补丁作者 **AC酱qwq** 与本补丁仓库
+        https://github.com/ACqwq/Digital-Storage-Extension-Patch
+   标注需在作品的文档、README、关于页面或创意工坊描述中清晰可见。
+3. **衍生作品同样适用等效协议**：任何基于本补丁的衍生作品在分发时，必须
+   ① 注明上述两处来源；② 遵守本协议全部条款；
+   ③ 以本协议（或与之等效的「非商用 + 署名 + 相同方式共享」协议）发布，不得附加任何额外限制。
+4. **衍生作品必须开源**：分发衍生作品（含修改版、整合版、只改数值的版本）时，
+   必须同时以公开、可自由获取的方式提供其**完整源代码**（含 .cs / .xml 等全部源文件），
+   不得只分发编译产物（.dll 等）。
+
+【免责声明】
+本补丁按"现状"提供，不提供任何明示或暗示的担保。作者不对使用本补丁造成的任何损失负责。
+
+---
+
+【Scope】
+This license covers the "Digital Storage Extension Patch" project and all of its source and text.
+This patch is a third-party extension (Harmony patch) for "Digital Storage"; it does **not** contain
+any code or assets from the upstream mod, which must be obtained separately.
+
+【Permitted】
+- Free use, modification, copying and distribution of this patch (non-commercial)
+- Creating derivative works based on this patch (non-commercial)
+- Referencing, borrowing or citing code from this patch (non-commercial)
+
+【Obligations】
+1. **Non-commercial only**: no direct or indirect commercial gain from this patch or any derivative
+   of it, including but not limited to: paid downloads, subscriptions, tip/donation walls,
+   ad revenue, bundling with paid products, paid modpacks or paid server perks.
+2. **Attribution**: any work (including code snippets) that distributes, modifies, derives from, or
+   references this patch must clearly credit both:
+   (a) the upstream author **Cagier.阳 / CagierAsh123** and repository
+       https://github.com/CagierAsh123/Digital-Storage
+   (b) this patch's author **AC酱qwq** and repository
+       https://github.com/ACqwq/Digital-Storage-Extension-Patch
+   Attribution must be visible in the work's documentation, README, About page or Workshop description.
+3. **Derivatives inherit this license**: any derivative must (a) state both sources above,
+   (b) comply with all terms of this license, and (c) be released under this license or an equivalent
+   non-commercial + attribution + share-alike license, with no additional restrictions.
+4. **Derivatives must be open source**: when distributing a derivative work, you must also make its
+   **complete source code** (all .cs / .xml and other source files) publicly and freely available.
+   Shipping compiled binaries (.dll) only is not allowed.
+
+【Disclaimer】
+This patch is provided "as is", without warranty of any kind, express or implied.
+The author is not liable for any damages arising from the use of this patch.

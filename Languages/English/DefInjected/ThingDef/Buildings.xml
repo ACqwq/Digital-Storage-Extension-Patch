@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <DigitalStoragePatch_CoreProjector.label>Digital Projection Core</DigitalStoragePatch_CoreProjector.label>
+  <DigitalStoragePatch_CoreProjector.description>Projects a digital storage core (on this map or another) to this location; the bound core is the real storage.
+
+Once built, use the "Bind core" gizmo to choose the core. Hauling items to the projector sends them straight into that core; this map’s resource counter and trade list count it too.
+
+The projector stores nothing and draws no power. If the bound core becomes unusable (unpowered, deconstructed, ...) it stops working too.</DigitalStoragePatch_CoreProjector.description>
+
+</LanguageData>

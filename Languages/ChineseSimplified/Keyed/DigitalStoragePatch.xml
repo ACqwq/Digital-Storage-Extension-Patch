@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 键名必须带本补丁前缀，避免与其它 mod 的翻译键冲突。 -->
+  <DigitalStoragePatch_SettingsCategory>数字存储 · 扩展补丁</DigitalStoragePatch_SettingsCategory>
+
+  <DigitalStoragePatch_SectionPerf>性能</DigitalStoragePatch_SectionPerf>
+  <DigitalStoragePatch_SkipCoreHaulRecalc>跳过核心搬运源重算（性能，默认关）</DigitalStoragePatch_SkipCoreHaulRecalc>
+  <DigitalStoragePatch_SkipCoreHaulRecalcDesc>开启后跳过一项针对核心内容物的高频重算，核心里存得越多省得越明显。代价：已吸进核心的物品会留在待搬运清单里，可能让自动收纳变慢甚至看起来不生效。</DigitalStoragePatch_SkipCoreHaulRecalcDesc>
+  <DigitalStoragePatch_HaulGhostGuard>搬运判定不再被幽灵物品卡死</DigitalStoragePatch_HaulGhostGuard>
+  <DigitalStoragePatch_HaulGhostGuardDesc>开启后，小人顺路搬运的判定会跳过已经不在任何地图/容器上的「幽灵物品」——原 mod 的同类防护没盖住 1.6 的这条新调用路径，幽灵物品进入搬运清单后，附近小人每次开工都会报错并卡住。每次拦下会按物品记一条日志（用于定位幽灵来源）。关闭 = 原版/原 mod 行为（幽灵物品存在时报错复现）。</DigitalStoragePatch_HaulGhostGuardDesc>
+
+  <DigitalStoragePatch_FixWasteEmptyJob>修复「清空废料容器」失效</DigitalStoragePatch_FixWasteEmptyJob>
+  <DigitalStoragePatch_FixWasteEmptyJobDesc>修复「清空废料容器」在数字核心上清不掉、刷日志或不派工的问题。开启后废料送进真正的储存区；没有可用储存区时放在就近空地，之后自动收进核心。</DigitalStoragePatch_FixWasteEmptyJobDesc>
+
+  <DigitalStoragePatch_SectionIntervals>执行间隔（10–600 tick）</DigitalStoragePatch_SectionIntervals>
+  <DigitalStoragePatch_AutoRestockInterval>自动补货间隔：{0} tick</DigitalStoragePatch_AutoRestockInterval>
+  <DigitalStoragePatch_AutoCollectInterval>投影核心自动收取间隔：{0} tick</DigitalStoragePatch_AutoCollectInterval>
+  <DigitalStoragePatch_ReceivingScanInterval>数字收货架扫描间隔：{0} tick</DigitalStoragePatch_ReceivingScanInterval>
+  <DigitalStoragePatch_IntervalHint>间隔越小反应越快、开销也越大，修改立即生效。投影核心的自动补货需要先开启下面的「自动补货到高优先级储存区」。</DigitalStoragePatch_IntervalHint>
+
+  <DigitalStoragePatch_SectionProjector>投影核心</DigitalStoragePatch_SectionProjector>
+  <DigitalStoragePatch_AutoRestock>自动补货到高优先级储存区（默认关）</DigitalStoragePatch_AutoRestock>
+  <DigitalStoragePatch_AutoRestockDesc>开启后，投影核心会把被绑定核心里的物品，送进本图存储优先级更高的储存区。默认关闭。</DigitalStoragePatch_AutoRestockDesc>
+  <DigitalStoragePatch_CollectSameMap>同图投影也执行自动收取</DigitalStoragePatch_CollectSameMap>
+  <DigitalStoragePatch_CollectSameMapDesc>默认开启。投影核心与它绑定的核心在同一张图时，投影也会照常吸收本图的散落物品。两者只是先后看到同一件物品，不会重复入库；想省这份开销可以关掉。</DigitalStoragePatch_CollectSameMapDesc>
+  <DigitalStoragePatch_RestockSameMap>同图投影也执行自动补货（默认关）</DigitalStoragePatch_RestockSameMap>
+  <DigitalStoragePatch_RestockSameMapDesc>默认关闭。投影核心与它绑定的核心在同一张图时，自动补货默认不执行；勾选后同图的投影核心也会补货。</DigitalStoragePatch_RestockSameMapDesc>
+  <DigitalStoragePatch_AutoCollectBatch>投影核心自动收取：每趟最多收 {0} 堆（0 = 跟随核心研究等级）</DigitalStoragePatch_AutoCollectBatch>
+  <DigitalStoragePatch_AutoRestockBatch>自动补货：每趟最多搬 {0} 堆（堆数越大铺得越快，单趟开销也越大）</DigitalStoragePatch_AutoRestockBatch>
+  <DigitalStoragePatch_BillCrossMapAnyCore>制作代理：跨图取任意可用核心（默认关）</DigitalStoragePatch_BillCrossMapAnyCore>
+  <DigitalStoragePatch_BillCrossMapAnyCoreDesc>默认：只有本图有投影核心绑定了那个核心时，制作代理才会跨图取料。勾选后制作代理会在本图无核心的情况下取用其他地图核心的材料</DigitalStoragePatch_BillCrossMapAnyCoreDesc>
+
+  <DigitalStoragePatch_SectionCapacity>存储容量</DigitalStoragePatch_SectionCapacity>
+  <DigitalStoragePatch_CustomCapacity>自定义存储容量（默认关）</DigitalStoragePatch_CustomCapacity>
+  <DigitalStoragePatch_CustomCapacityDesc>默认关闭；关闭时完全不改动原 mod 的容量。开启后，下面四个数值会替换对应科技等级的核心容量，立即生效。</DigitalStoragePatch_CustomCapacityDesc>
+  <DigitalStoragePatch_CapLevel1>一级（未研究核心科技）：</DigitalStoragePatch_CapLevel1>
+  <DigitalStoragePatch_CapLevel2>二级（核心 Lv2）：</DigitalStoragePatch_CapLevel2>
+  <DigitalStoragePatch_CapLevel3>三级（核心 Lv3）：</DigitalStoragePatch_CapLevel3>
+  <DigitalStoragePatch_CapLevel4>四级（核心 Lv4）：</DigitalStoragePatch_CapLevel4>
+  <DigitalStoragePatch_CapacityHint>原 mod 原值：500 / 1000 / 1500 / 3000。数值保存在补丁自己的设置里，与存档无关。</DigitalStoragePatch_CapacityHint>
+
+  <DigitalStoragePatch_SectionPriority>工作优先级</DigitalStoragePatch_SectionPriority>
+  <DigitalStoragePatch_PriorityModDefault>原 mod 逻辑（默认）</DigitalStoragePatch_PriorityModDefault>
+  <DigitalStoragePatch_PriorityModDefaultDesc>不动原 mod 的工作优先级。</DigitalStoragePatch_PriorityModDefaultDesc>
+  <DigitalStoragePatch_PriorityVanillaFirst>工作优先级置底</DigitalStoragePatch_PriorityVanillaFirst>
+  <DigitalStoragePatch_PriorityVanillaFirstDesc>会把原 mod 的增加的所有工作优先级置底，小人会先完成其他工作。目前只影响"从核心取料送建造"。</DigitalStoragePatch_PriorityVanillaFirstDesc>
+  <DigitalStoragePatch_SectionPower>电力</DigitalStoragePatch_SectionPower>
+  <DigitalStoragePatch_PowerExempt>用电豁免（默认关）</DigitalStoragePatch_PowerExempt>
+  <DigitalStoragePatch_PowerExemptDesc>开启后，数字存储核心、数字工人与制作代理始终认为自己已通电并工作：即使电网断电也不会让它们停机。在通电时依然正常耗电。</DigitalStoragePatch_PowerExemptDesc>
+
+  <DigitalStoragePatch_SectionDebug>调试</DigitalStoragePatch_SectionDebug>
+  <DigitalStoragePatch_Diagnostics>诊断日志（默认关）</DigitalStoragePatch_Diagnostics>
+  <DigitalStoragePatch_DiagnosticsDesc>在日志里输出本补丁的运行细节（如绑定变化、自动收纳的判定状态），排查问题时开启。</DigitalStoragePatch_DiagnosticsDesc>
+
+  <!-- 投影核心 -->
+  <DigitalStoragePatch_Projector_Unbound>未绑定核心。请使用「绑定核心」指令选择目标。</DigitalStoragePatch_Projector_Unbound>
+  <DigitalStoragePatch_Projector_CoreLost>绑定的核心已丢失（可能已被拆除）。请重新绑定。</DigitalStoragePatch_Projector_CoreLost>
+  <DigitalStoragePatch_Projector_CoreDestroyed>绑定的核心已被摧毁。</DigitalStoragePatch_Projector_CoreDestroyed>
+  <DigitalStoragePatch_Projector_CoreAbsent>绑定的核心当前不在地图上（已收起或随地图卸载）。</DigitalStoragePatch_Projector_CoreAbsent>
+  <DigitalStoragePatch_Projector_BoundTo>已绑定：{0}</DigitalStoragePatch_Projector_BoundTo>
+  <DigitalStoragePatch_Projector_CrossMap>跨图投影 → {0}</DigitalStoragePatch_Projector_CrossMap>
+  <DigitalStoragePatch_Projector_SameMap>绑定的是本图核心：投影照常自动收取（补货默认关闭）。</DigitalStoragePatch_Projector_SameMap>
+  <DigitalStoragePatch_Projector_CollectSameMapOffHint>（同图投影：自动收取已被设置关闭。如需同图也收，到补丁设置里开启「同图投影也执行自动收取」。）</DigitalStoragePatch_Projector_CollectSameMapOffHint>
+  <DigitalStoragePatch_Projector_CoreUnusable>绑定核心当前不可用，投影暂停工作。</DigitalStoragePatch_Projector_CoreUnusable>
+  <DigitalStoragePatch_Projector_Bind>绑定核心</DigitalStoragePatch_Projector_Bind>
+  <DigitalStoragePatch_Projector_BindDesc>选择一个数字存储核心（本图或其它地图）作为投影目标。</DigitalStoragePatch_Projector_BindDesc>
+  <DigitalStoragePatch_Projector_Unbind>解除绑定</DigitalStoragePatch_Projector_Unbind>
+  <DigitalStoragePatch_Projector_UnbindDesc>解除与当前核心的绑定。</DigitalStoragePatch_Projector_UnbindDesc>
+  <DigitalStoragePatch_Projector_ThisMap>（本图）</DigitalStoragePatch_Projector_ThisMap>
+  <DigitalStoragePatch_Projector_OtherMap>（{0}）</DigitalStoragePatch_Projector_OtherMap>
+  <DigitalStoragePatch_Projector_NoCores>没有找到可用的数字存储核心。</DigitalStoragePatch_Projector_NoCores>
+  <DigitalStoragePatch_Projector_Option>{0}{1}</DigitalStoragePatch_Projector_Option>
+  <DigitalStoragePatch_Projector_Current>（当前）</DigitalStoragePatch_Projector_Current>
+  <DigitalStoragePatch_Projector_NotPrimary>本图还有另一个投影绑定着同一个核心：统计与收取由它负责，本投影只作为投放点。</DigitalStoragePatch_Projector_NotPrimary>
+  <DigitalStoragePatch_Projector_AutoIngestDesc>切换被绑定核心的自动收纳。开启后，核心会吸收它自己那张图的散落物品，本投影也会吸收这张图上的散落物品；收取速度跟随核心的自动收纳研究等级或设置。</DigitalStoragePatch_Projector_AutoIngestDesc>
+  <DigitalStoragePatch_Projector_ScanStats>上次自动收取扫描：候选 {0} 件，入库 {1} 件</DigitalStoragePatch_Projector_ScanStats>
+  <DigitalStoragePatch_Projector_RestockStats>自动补货：{0}，本图更高优先级储存区 {1} 个，累计已搬 {2} 堆</DigitalStoragePatch_Projector_RestockStats>
+  <DigitalStoragePatch_Projector_NoRestockHint>（本图没有存储优先级高于该核心的储存区 —— 自动补货只会往那种区里送。把目标储存区优先级调到「重要」或「紧急」试试。）</DigitalStoragePatch_Projector_NoRestockHint>
+  <DigitalStoragePatch_Projector_RestockSameMapHint>（同图投影：自动补货已被静音。如需要，到补丁设置里开启「同图投影也执行自动补货」。）</DigitalStoragePatch_Projector_RestockSameMapHint>
+  <DigitalStoragePatch_On>开</DigitalStoragePatch_On>
+  <DigitalStoragePatch_Off>关</DigitalStoragePatch_Off>
+
+  <!-- 数字收货架 -->
+  <DigitalStoragePatch_Shelf_Auto>自动：使用本图可用的数字核心（可用「绑定核心」指定）</DigitalStoragePatch_Shelf_Auto>
+  <DigitalStoragePatch_Shelf_AutoOption>自动（本图可用核心）</DigitalStoragePatch_Shelf_AutoOption>
+  <DigitalStoragePatch_Shelf_BoundTo>收货目标：{0}</DigitalStoragePatch_Shelf_BoundTo>
+  <DigitalStoragePatch_Shelf_CoreLost>指定的核心已丢失（可能已被拆除）。请重新绑定，或改用「自动」。</DigitalStoragePatch_Shelf_CoreLost>
+  <DigitalStoragePatch_Shelf_CoreUnusable>指定的核心当前不可用（未通电等），暂时改用自动选核。</DigitalStoragePatch_Shelf_CoreUnusable>
+  <DigitalStoragePatch_Shelf_CrossMap>跨图收货 → {0}</DigitalStoragePatch_Shelf_CrossMap>
+  <DigitalStoragePatch_Shelf_Stats>上次扫描：入库 {0} 堆，留在架上 {1} 堆（筛选不收 {2}，核心装不下 {3}）</DigitalStoragePatch_Shelf_Stats>
+  <DigitalStoragePatch_Shelf_FilterHint>有物品被核心筛选拒绝 —— 货架的「可存放物品」是跟随核心的，去核心上改筛选即可。</DigitalStoragePatch_Shelf_FilterHint>
+  <DigitalStoragePatch_Shelf_Bind>绑定核心</DigitalStoragePatch_Shelf_Bind>
+  <DigitalStoragePatch_Shelf_BindDesc>指定一个数字存储核心作为收货目标。不指定则自动选用本图可用核心。</DigitalStoragePatch_Shelf_BindDesc>
+  <DigitalStoragePatch_Shelf_Unbind>改为自动</DigitalStoragePatch_Shelf_Unbind>
+  <DigitalStoragePatch_Shelf_UnbindDesc>取消指定，回到自动选择核心。</DigitalStoragePatch_Shelf_UnbindDesc>
+
+  <DigitalStoragePatch_SectionUI>界面</DigitalStoragePatch_SectionUI>
+  <DigitalStoragePatch_UI_CraftButton>显示底部「制作自动化」按钮（默认关）</DigitalStoragePatch_UI_CraftButton>
+  <DigitalStoragePatch_UI_CraftButtonDesc>开启后底部菜单栏才显示「制作自动化」按钮。默认关闭；关着时同一个面板仍可在制作代理建筑上打开。改完立即生效。</DigitalStoragePatch_UI_CraftButtonDesc>
+  <DigitalStoragePatch_UI_WithdrawPicker>「从数字存储取出…」改用增强取料面板</DigitalStoragePatch_UI_WithdrawPicker>
+  <DigitalStoragePatch_UI_WithdrawPickerDesc>开启后，右键「从数字存储取出…」会打开带图标、分组、搜索与「取满」的选料面板；关闭则回到原 mod 的两级菜单。改完立即生效。</DigitalStoragePatch_UI_WithdrawPickerDesc>
+
+  <!-- 增强取料面板（P）。DS_WithdrawToSpot / DS_WithdrawBtn / DS_Kinds / DS_Group_* 直接复用原 mod 的翻译键。 -->
+  <DigitalStoragePatch_WithdrawPicker_Hint>点「取出」选择数量，或点「取满」按可携带上限直接下单。列表为打开/刷新时的库存快照；远图物品的行尾标注远图数量（悬停行可查看所在核心），下单后小人会自动跨图取回。</DigitalStoragePatch_WithdrawPicker_Hint>
+  <DigitalStoragePatch_WithdrawPicker_Refresh>刷新</DigitalStoragePatch_WithdrawPicker_Refresh>
+  <DigitalStoragePatch_WithdrawPicker_Empty>核心里没有可取的物品。</DigitalStoragePatch_WithdrawPicker_Empty>
+  <DigitalStoragePatch_WithdrawPicker_TakeAll>取满</DigitalStoragePatch_WithdrawPicker_TakeAll>
+  <DigitalStoragePatch_WithdrawPicker_CantCarry>当前小人拿不动这件物品（可携带量为 0）。</DigitalStoragePatch_WithdrawPicker_CantCarry>
+  <DigitalStoragePatch_WithdrawPicker_Took>已下单：{0} × {1}，小人会自行前往取回。</DigitalStoragePatch_WithdrawPicker_Took>
+  <DigitalStoragePatch_WithdrawPicker_TookFail>没有找到可用的{0}（库存可能已变化），请刷新后重试。</DigitalStoragePatch_WithdrawPicker_TookFail>
+  <DigitalStoragePatch_WithdrawPicker_SourceMixed>本图 {0} + 远图 {1}</DigitalStoragePatch_WithdrawPicker_SourceMixed>
+  <DigitalStoragePatch_WithdrawPicker_SourceRemote>远图 {0}</DigitalStoragePatch_WithdrawPicker_SourceRemote>
+  <DigitalStoragePatch_WithdrawPicker_RemoteTip>远图来源：{0}</DigitalStoragePatch_WithdrawPicker_RemoteTip>
+
+  <!-- 投影核心存储面板（H）。页签名/容量条/取出按钮等文案直接复用原 mod 的 DS_* 翻译键。 -->
+  <DigitalStoragePatch_ProjITab_Capacity>库存 {0} / {1} 堆（{2} 种）</DigitalStoragePatch_ProjITab_Capacity>
+  <DigitalStoragePatch_ProjITab_BoundTo>投影目标：{0}</DigitalStoragePatch_ProjITab_BoundTo>
+  <DigitalStoragePatch_ProjITab_Unbound>尚未绑定核心 —— 右键本建筑选择要投影的核心。绑定后这里会显示那张图核心里的库存，并可直接取出到本建筑脚下。</DigitalStoragePatch_ProjITab_Unbound>
+  <DigitalStoragePatch_ProjITab_CoreUnusable>被绑定核心当前不可用（未通电等）。</DigitalStoragePatch_ProjITab_CoreUnusable>
+
+  <DigitalStoragePatch_SectionTrade>交易</DigitalStoragePatch_SectionTrade>
+  <DigitalStoragePatch_TradeFromCore>远行队 / 据点交易使用数字核心库存（默认关）</DigitalStoragePatch_TradeFromCore>
+  <DigitalStoragePatch_TradeFromCoreDesc>开启后，地图上的访客商人与轨道商船会把其他地图中数字核心里的物品列入可卖清单。</DigitalStoragePatch_TradeFromCoreDesc>
+  <!-- 数字电池（F） -->
+  <DigitalStoragePatch_SectionBattery>数字电池</DigitalStoragePatch_SectionBattery>
+  <DigitalStoragePatch_Battery_Capacity>单块电池容量（Wd）：</DigitalStoragePatch_Battery_Capacity>
+  <DigitalStoragePatch_Battery_TargetPct>平衡线：容量的 {0}%（高于它存入数字库，低于它从数字库回填）</DigitalStoragePatch_Battery_TargetPct>
+  <DigitalStoragePatch_Battery_Interval>平衡周期（tick，30–10000）：</DigitalStoragePatch_Battery_Interval>
+  <DigitalStoragePatch_Battery_Hint>所有数字电池共用同一个数字库，跨地图输电是自动的：一张图的盈余会自动补给另一张图的缺口。改容量对已建成的电池立即生效，多出来的电不会丢。每块电池可单独关闭「自动平衡」。</DigitalStoragePatch_Battery_Hint>
+  <DigitalStoragePatch_Battery_Shared>共享数字库存电：{0}</DigitalStoragePatch_Battery_Shared>
+  <DigitalStoragePatch_Battery_Balance>自动平衡：{0}</DigitalStoragePatch_Battery_Balance>
+  <DigitalStoragePatch_Battery_BalanceToggle>自动平衡</DigitalStoragePatch_Battery_BalanceToggle>
+  <DigitalStoragePatch_Battery_BalanceToggleDesc>开启时，超出平衡线的电量自动存入共享数字库，缺口自动回填。关闭后这一块电池停止平衡、不再与数字库交互（其他数字电池不受影响）。</DigitalStoragePatch_Battery_BalanceToggleDesc>
+
+  <!-- 制作代理 -->
+  <DigitalStoragePatch_SectionCraftWorker>制作代理</DigitalStoragePatch_SectionCraftWorker>
+  <DigitalStoragePatch_CraftAnyBench>识别其它 mod 的工作台</DigitalStoragePatch_CraftAnyBench>
+  <DigitalStoragePatch_CraftAnyBenchDesc>制作代理原先只认原版的工作台。加了其它 mod 的灶台、厨房或工作台时，配方能在面板里选到，却一直显示缺料或堵塞、永远不开工。开启后这些工作台也能正常接单。（关闭 = 原版行为）</DigitalStoragePatch_CraftAnyBenchDesc>
+  <DigitalStoragePatch_CraftReclaimIdle>「维持数量」达标后让出工作台</DigitalStoragePatch_CraftReclaimIdle>
+  <DigitalStoragePatch_CraftReclaimIdleDesc>开启后，配方设为「维持数量」达标时会自动让出工作台（正在做的那件仍会做完），数量掉下来后自动重新接手 —— 原版会一直占着台子不放，后面的配方等不到。关闭 = 原版行为。</DigitalStoragePatch_CraftReclaimIdleDesc>
+  <DigitalStoragePatch_ProxyWorkerNoThink>代理工人不再被原版派活</DigitalStoragePatch_ProxyWorkerNoThink>
+  <DigitalStoragePatch_ProxyWorkerNoThinkDesc>开启后数字工人与制作代理不会再往日志里刷报错，工作不受影响。关闭 = 原版行为。</DigitalStoragePatch_ProxyWorkerNoThinkDesc>
+  <DigitalStoragePatch_WorkerCleanBackstory>代理工人不再抽到「干不了活」的背景</DigitalStoragePatch_WorkerCleanBackstory>
+  <DigitalStoragePatch_WorkerCleanBackstoryDesc>开启后数字工人与制作代理不会再出现「资质不够」、某些活做不了的情况。关闭 = 原版行为。</DigitalStoragePatch_WorkerCleanBackstoryDesc>
+  <DigitalStoragePatch_WithdrawRespectReservations>同一块工地不会重复派人取料</DigitalStoragePatch_WithdrawRespectReservations>
+  <DigitalStoragePatch_WithdrawRespectReservationsDesc>开启后，同一块工地同时只会有一个小人去数字核心取料，不会出现几个小人各取一份、材料被反复取出的情况。关闭 = 原版行为。</DigitalStoragePatch_WithdrawRespectReservationsDesc>
+  <DigitalStoragePatch_WithdrawCapToNeed>送进工地的材料不会超过实际需要</DigitalStoragePatch_WithdrawCapToNeed>
+  <DigitalStoragePatch_WithdrawCapToNeedDesc>开启后，小人送进在建工地的材料不会超过它实际还需要的数量（多出来的当场退回数字核心）。关闭 = 原版行为。</DigitalStoragePatch_WithdrawCapToNeedDesc>
+  <DigitalStoragePatch_ConstructPickupAmountFix>建造取料不会把核心里的材料成堆搬空</DigitalStoragePatch_ConstructPickupAmountFix>
+  <DigitalStoragePatch_ConstructPickupAmountFixDesc>开启后，送到在建工地的材料只会取这一格实际需要的数量，不会把数字核心里的同种材料一次搬空。关闭 = 原版行为。</DigitalStoragePatch_ConstructPickupAmountFixDesc>
+
+  <!-- v0.60 · FIX-11 / FIX-12 -->
+  <DigitalStoragePatch_CraftAddDuplicate>同一配方允许重复添加任务（实验性，默认关）</DigitalStoragePatch_CraftAddDuplicate>
+  <DigitalStoragePatch_CraftAddDuplicateDesc>开启后，挑配方时已添加的配方仍可点击追加，同一配方（如切石砖）可以建立多个独立任务，各自的模式与数量互不影响。已知限制：重复任务共用同一配方，无法指定不同原料（比如"这个切花岗岩、那个切大理石"）。关闭 = 原版行为（一个配方只能有一个任务）。</DigitalStoragePatch_CraftAddDuplicateDesc>
+  <DigitalStoragePatch_CraftFairBenchAlloc>工作台按需分配、任务间公平共享（实验性，默认关）</DigitalStoragePatch_CraftFairBenchAlloc>
+  <DigitalStoragePatch_CraftFairBenchAllocDesc>开启后，制作代理只按任务的实际需要占用工作台（做几件占几个），多个任务轮流共享范围内的台子；完全分不到台子的任务会从占用较多的任务那里等来一个空位，正在做的那件不受影响。没有竞争时仍然可以用满所有台子并行。关闭 = 原版行为（先到先得，占满为止）。</DigitalStoragePatch_CraftFairBenchAllocDesc>
+  <DigitalStoragePatch_CraftIngredientClaims>并行制作不再互相重置进度（实验性，默认关）</DigitalStoragePatch_CraftIngredientClaims>
+  <DigitalStoragePatch_CraftIngredientClaimsDesc>开启后，同一配方的多条并行制作线会各自使用自己的原料堆 —— 原版它们共用同一堆料，一条完成会把其它线的进度清零重新读条（并行实际等于单线）。已知限制：某种原料只剩一堆时，后面的线会等前一条做完（串行但不清零）。关闭 = 原版行为。</DigitalStoragePatch_CraftIngredientClaimsDesc>
+
+  <DigitalStoragePatch_CraftWindowNonModal>打开制作面板时可调整游戏速度</DigitalStoragePatch_CraftWindowNonModal>
+  <DigitalStoragePatch_CraftWindowNonModalDesc>开启后，制作自动化界面不再独占鼠标与键盘，可以正常调速、按 1/2/3/4 与操作底部按钮；代价是点击窗口外的地图会穿透（可能取消选择）。关闭 = 原版行为。</DigitalStoragePatch_CraftWindowNonModalDesc>
+
+  <DigitalStoragePatch_CraftUftRecipes>允许处理「需要半成品」的配方（实验性，默认关）</DigitalStoragePatch_CraftUftRecipes>
+  <DigitalStoragePatch_CraftUftRecipesDesc>开启后，服装 / 武器 / 装备等需要「未完成品」的配方也能交给制作代理，代理直接出成品。已知限制：地图上已有同一配方的半成品时该配方会显示堵塞 —— 把半成品处理掉即可。默认关闭，建议先做一件确认产物正确。关闭 = 原版行为。</DigitalStoragePatch_CraftUftRecipesDesc>
+
+  <!-- 存储核心 -->
+  <DigitalStoragePatch_SectionCoreStorage>存储核心</DigitalStoragePatch_SectionCoreStorage>
+  <DigitalStoragePatch_KeepCoreFilterOnLoad>读档时保留核心的存储筛选</DigitalStoragePatch_KeepCoreFilterOnLoad>
+  <DigitalStoragePatch_KeepCoreFilterOnLoadDesc>开启后，读档不再改动数字核心的存储筛选 —— 原版每次读档会按一个内部开关重设「武器」这一类，你改过的勾选会被改回去。关闭 = 原版行为。</DigitalStoragePatch_KeepCoreFilterOnLoadDesc>
+
+  <DigitalStoragePatch_RitualOfferingFromCore>异象仪式可从核心取祭品</DigitalStoragePatch_RitualOfferingFromCore>
+  <DigitalStoragePatch_RitualOfferingFromCoreDesc>开启后，需要祭品的心灵仪式（异象）会把核心里的祭品算上，也能从核心取出用于收集。关闭 = 原版行为。</DigitalStoragePatch_RitualOfferingFromCoreDesc>
+
+  <DigitalStoragePatch_FeedPatientReservable>病人喂食预约修复</DigitalStoragePatch_FeedPatientReservable>
+  <DigitalStoragePatch_FeedPatientReservableDesc>开启后，修复「病人喂食一直起不来」的问题：选中的食物若正好被别人占用，就改从数字核心取一份新的来喂。默认开启；只在本来就会失败时才动手，不会让能成的喂食变坏。关闭 = 原版行为。</DigitalStoragePatch_FeedPatientReservableDesc>
+
+  <DigitalStoragePatch_CoreFoodScoringMood>取食排序考虑心情后果</DigitalStoragePatch_CoreFoodScoringMood>
+  <DigitalStoragePatch_CoreFoodScoringMoodDesc>开启后，从数字核心取食时会把「吃了掉不掉心情」也算进评分，优先挑更合适的食物。默认开启。关闭 = 原 mod 行为。</DigitalStoragePatch_CoreFoodScoringMoodDesc>
+
+  <DigitalStoragePatch_GiveItemsFromCore>给难民 / 访客送物资时可用核心库存</DigitalStoragePatch_GiveItemsFromCore>
+  <DigitalStoragePatch_GiveItemsFromCoreDesc>开启后，难民或访客索要物资时，地图上找不到的可以从数字核心取用并交付（地图上有现成的不会插手）。关闭 = 原版行为。</DigitalStoragePatch_GiveItemsFromCoreDesc>
+
+  <DigitalStoragePatch_InventoryStockFromCore>「携带」栏的目标可用核心库存补货</DigitalStoragePatch_InventoryStockFromCore>
+  <DigitalStoragePatch_InventoryStockFromCoreDesc>开启后，「携带」栏的目标也能用数字核心里的东西补齐（地图上有现成的不会插手）。关闭 = 原版行为。</DigitalStoragePatch_InventoryStockFromCoreDesc>
+
+  <DigitalStoragePatch_BloodTransfusionFromCore>输血手术把核心里的血原包算在内</DigitalStoragePatch_BloodTransfusionFromCore>
+  <DigitalStoragePatch_BloodTransfusionFromCoreDesc>开启后，地图上没有血原包而核心里有时，「输血」手术照常可用，需要的包数也会把核心里的算进去。关闭 = 原版行为。</DigitalStoragePatch_BloodTransfusionFromCoreDesc>
+
+  <DigitalStoragePatch_FoodRestrictionAlign>取食时补上饮食方案之外的规则（实验性，默认关）</DigitalStoragePatch_FoodRestrictionAlign>
+  <DigitalStoragePatch_FoodRestrictionAlignDesc>开启后，从核心拿食物时也会按原版的爵位食物限制、动物崇拜戒律等规则复核（只会更严，不会更松）。副作用：喂食被拦下时食物会短暂掉在地上，之后被自动收纳吸回。关闭 = 原 mod 行为。</DigitalStoragePatch_FoodRestrictionAlignDesc>
+  <!-- v0.45 · 物品可见性兜底（二） -->
+  <DigitalStoragePatch_SectionVisibilityB>核心库存可用性</DigitalStoragePatch_SectionVisibilityB>
+  <DigitalStoragePatch_HemogenFeedFromCore>输注血原质可用核心血原包</DigitalStoragePatch_HemogenFeedFromCore>
+  <DigitalStoragePatch_HemogenFeedFromCoreDesc>开启后，地图上没有血原包而核心里有时，也能正常为血原质依赖者输送血原质。关闭 = 原版行为。</DigitalStoragePatch_HemogenFeedFromCoreDesc>
+  <DigitalStoragePatch_HemogenPackFromCore>血原质依赖者可从核心取血原包</DigitalStoragePatch_HemogenPackFromCore>
+  <DigitalStoragePatch_HemogenPackFromCoreDesc>开启后，地图上没有血原包时，小人也能从核心取用血原包补血原质。即使是囚犯也能取用（已知）。关闭 = 原版行为。</DigitalStoragePatch_HemogenPackFromCoreDesc>
+  <DigitalStoragePatch_BingeDrugFromCore>滥用/沉迷成瘾品可取核心里的成瘾品</DigitalStoragePatch_BingeDrugFromCore>
+  <DigitalStoragePatch_BingeDrugFromCoreDesc>开启后，小人在进入滥用/沉迷成瘾品后可以从核心取出成瘾品使用。关闭 = 原版行为。</DigitalStoragePatch_BingeDrugFromCoreDesc>
+  <DigitalStoragePatch_MoveDrugsToInventoryFromCore>医疗用品携带可以取用核心库存</DigitalStoragePatch_MoveDrugsToInventoryFromCore>
+  <DigitalStoragePatch_MoveDrugsToInventoryFromCoreDesc>开启后，可以取用核心中的医疗用品填补携带数量。关闭 = 原版行为。</DigitalStoragePatch_MoveDrugsToInventoryFromCoreDesc>
+  <DigitalStoragePatch_TurretSuppliesFromCore>操作炮塔时可从核心补弹/燃料</DigitalStoragePatch_TurretSuppliesFromCore>
+  <DigitalStoragePatch_TurretSuppliesFromCoreDesc>开启后，在操作炮塔时可以取用核心中的炮弹。关闭 = 原版行为。</DigitalStoragePatch_TurretSuppliesFromCoreDesc>
+  <DigitalStoragePatch_FillBarrelFromCore>可以从核心取出麦芽汁倒入发酵桶</DigitalStoragePatch_FillBarrelFromCore>
+  <DigitalStoragePatch_FillBarrelFromCoreDesc>开启后，可以从核心取出麦芽汁倒入发酵桶，理论兼容其他使用该原理的容器。关闭 = 原版行为。</DigitalStoragePatch_FillBarrelFromCoreDesc>
+  <DigitalStoragePatch_DyeFromCore>染色/涂装可用核心里的染料</DigitalStoragePatch_DyeFromCore>
+  <DigitalStoragePatch_DyeFromCoreDesc>开启后，染发、改衣物颜色、涂装建筑与地板也能从核心取出染料。关闭 = 原版行为。</DigitalStoragePatch_DyeFromCoreDesc>
+  <DigitalStoragePatch_MonumentStuffFromCore>纪念碑材料菜单认核心里的材料</DigitalStoragePatch_MonumentStuffFromCore>
+  <DigitalStoragePatch_MonumentStuffFromCoreDesc>开启后，纪念碑蓝图的材料菜单会识别在核心中的材料。关闭 = 原版行为。</DigitalStoragePatch_MonumentStuffFromCoreDesc>
+  <DigitalStoragePatch_XenogermFromCore>异种胚芽操作流程可识别核心</DigitalStoragePatch_XenogermFromCore>
+  <DigitalStoragePatch_XenogermFromCoreDesc>开启后，超凡胶囊与异种胚芽存在核心里时，组装、运送、植入这三步都能正常进行。关闭 = 原版行为。</DigitalStoragePatch_XenogermFromCoreDesc>
+  <DigitalStoragePatch_BiosculpterFromCore>塑形仓补营养可取核心食物</DigitalStoragePatch_BiosculpterFromCore>
+  <DigitalStoragePatch_BiosculpterFromCoreDesc>开启后，塑形仓可识别核心中的营养并取出使用。关闭 = 原版行为。</DigitalStoragePatch_BiosculpterFromCoreDesc>
+  <DigitalStoragePatch_WardenHemogenFromCore>狱卒从核心取出血原包递给囚犯</DigitalStoragePatch_WardenHemogenFromCore>
+  <DigitalStoragePatch_WardenHemogenFromCoreDesc>开启后，狱卒也能从核心取出，给血原质依赖者的囚犯送血原包。关闭 = 原版行为。</DigitalStoragePatch_WardenHemogenFromCoreDesc>
+  <DigitalStoragePatch_GatheringEatFromCore>在聚会时可取核心食物进食</DigitalStoragePatch_GatheringEatFromCore>
+  <DigitalStoragePatch_GatheringEatFromCoreDesc>开启后，在聚会时若附近没有食物，小人可以在核心中取出食物食用。关闭 = 原版行为。</DigitalStoragePatch_GatheringEatFromCoreDesc>
+  <DigitalStoragePatch_EatRandomFromCore>动物在随机进食可从核心取食物（实验性，默认关）</DigitalStoragePatch_EatRandomFromCore>
+  <DigitalStoragePatch_EatRandomFromCoreDesc>开启后，殖民地的动物也能取用核心里的东西食用。实验性、默认关：判据较宽，不可控，动物可能吃到你不想让它吃的。关闭 = 原版行为。</DigitalStoragePatch_EatRandomFromCoreDesc>
+  <DigitalStoragePatch_AmmoFromCore>装填武器/装备时可用核心里的弹药</DigitalStoragePatch_AmmoFromCore>
+  <DigitalStoragePatch_AmmoFromCoreDesc>开启后，可装填的武器与装备可以从核心中取出材料装填。关闭 = 原版行为。</DigitalStoragePatch_AmmoFromCoreDesc>
+  <DigitalStoragePatch_ShardFromCore>暗黑超凡碎片判定可识别核心</DigitalStoragePatch_ShardFromCore>
+  <DigitalStoragePatch_ShardFromCoreDesc>开启后，暗黑超凡碎片全在核心里时，停用黄金立方体与方尖碑也能判定通过。已知限制：核心里的暗黑超凡碎片无法做原版的「此刻走得到吗」检查，偶尔会出现「选项给了、那一刻却拿不到」。关闭 = 原版行为。</DigitalStoragePatch_ShardFromCoreDesc>
+  <DigitalStoragePatch_FixedIngredientFromCore>固定材料取料认核心</DigitalStoragePatch_FixedIngredientFromCore>
+  <DigitalStoragePatch_FixedIngredientFromCoreDesc>开启后，材料全在核心里时，停用方尖碑与给机械女皇补材料时也能拿出。建议与上一项「暗黑超凡碎片判定可识别核心」一起开。关闭 = 原版行为。</DigitalStoragePatch_FixedIngredientFromCoreDesc>
+
+  <DigitalStoragePatch_CoreRejectUnfinished>核心不接收「未完成」物品</DigitalStoragePatch_CoreRejectUnfinished>
+  <DigitalStoragePatch_CoreRejectUnfinishedDesc>开启后，核心彻底不接收「未完成」半成品（例如未完成的衣服、武器 —— 放进核心可能被吞掉）：建好或读档时自动从「可存放物品」里取消该类别，入库时再拒一次。关闭 = 原版行为。</DigitalStoragePatch_CoreRejectUnfinishedDesc>
+
+  <!-- 核心命名（恢复 4.0 删掉的功能） -->
+  <DigitalStoragePatch_Core_Rename>重命名核心</DigitalStoragePatch_Core_Rename>
+  <DigitalStoragePatch_Core_RenameDesc>给这个数字存储核心修改名字。命名后在地图上它的显示名都会变成这个名字。留空保存即清除命名。</DigitalStoragePatch_Core_RenameDesc>
+  <DigitalStoragePatch_Core_RenameBoundDesc>给被绑定的那个核心改名。</DigitalStoragePatch_Core_RenameBoundDesc>
+  <DigitalStoragePatch_Core_RenamePrompt>输入这个核心的名称：</DigitalStoragePatch_Core_RenamePrompt>
+  <DigitalStoragePatch_Core_RenameHint>留空并确定 = 清除命名。</DigitalStoragePatch_Core_RenameHint>
+  <DigitalStoragePatch_Core_NameIs>核心名称：{0}</DigitalStoragePatch_Core_NameIs>
+  <DigitalStoragePatch_Confirm>确定</DigitalStoragePatch_Confirm>
+  <DigitalStoragePatch_Cancel>取消</DigitalStoragePatch_Cancel>
+
+  <!-- v0.35 · 搬运兼容 -->
+  <DigitalStoragePatch_AvoidCoreDirectHaul>有收货架时，不再让小人直接往核心搬货（默认关）</DigitalStoragePatch_AvoidCoreDirectHaul>
+  <DigitalStoragePatch_AvoidCoreDirectHaulDesc>配合 Pick Up And Haul、Hauler’s Dream 等搬运 mod 时建议开。核心同一时间只允许一个小人操作，否则会「一次搬一堆、其余人干等」。开启后，本图有收货架能收下这件物品时小人改投收货架（可多人同时投料），再由收货架转进核心；没有可用收货架时仍走核心。关闭 = 原版行为。</DigitalStoragePatch_AvoidCoreDirectHaulDesc>
+
+  <!-- v0.36 · 性能 -->
+  <DigitalStoragePatch_ShelfSkipIngestNotify>收货架入库后不做即时全量体检</DigitalStoragePatch_ShelfSkipIngestNotify>
+  <DigitalStoragePatch_ShelfSkipIngestNotifyDesc>开启（默认）：收货架入库后不再立刻让搬运系统重核核心里的每一件物品 —— 原版本来就会周期性做同一件事，立刻再做一遍属于重复劳动。代价：刚入库的物品最晚要等一个周期才被搬运系统看到。关闭 = 回到入库后立刻核对。</DigitalStoragePatch_ShelfSkipIngestNotifyDesc>
+
+  <!-- v0.37 · 交易付款补齐 -->
+  <DigitalStoragePatch_TradePayFromCore>付款时可以从数字核心扣银</DigitalStoragePatch_TradePayFromCore>
+  <DigitalStoragePatch_TradePayFromCoreDesc>开启（默认）：付款时信标范围内的地面银不够，差额从数字核心扣（先扣地面，再扣核心）。原 mod 只让「统计可用银」算上核心、实际扣款只看地面，于是会出现「界面显示银够、付款却失败并报红」。对原版轨道贸易同样有效。关闭 = 原版行为。</DigitalStoragePatch_TradePayFromCoreDesc>
+
+  <!-- v0.38 · Mod 兼容性（针对其它 mod 的"特殊识别逻辑"） -->
+  <DigitalStoragePatch_SectionModCompat>Mod 兼容性</DigitalStoragePatch_SectionModCompat>
+  <DigitalStoragePatch_BamMaterialsFromCore>建筑菜单也认数字核心里的材料</DigitalStoragePatch_BamMaterialsFromCore>
+  <DigitalStoragePatch_BamMaterialsFromCoreDesc>开启（默认）：让 Better Architect Menu 的地板页与默认选材也认数字核心里的材料 —— 材料只存在核心时，原本找不到对应分类、地板也就建不了。不改变该 mod 原有的任何判断。未安装该 mod 时无效果。关闭 = 保持它原本的表现。</DigitalStoragePatch_BamMaterialsFromCoreDesc>
+</LanguageData>
