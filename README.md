@@ -38,8 +38,9 @@
 - **跨图交易**（默认关）、**自动补货**（默认关）
 
 ### 修复与兼容
-- 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出、读档幽灵物品报错刷屏 等
-- 兼容：Pick Up And Haul / Hauler's Dream、Universal Trade Hub、Better Architect Menu 等
+- 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出、读档幽灵物品报错刷屏、
+  建造材料被成堆搬进工地、数字工人替身被原版 AI 派活 等
+- 兼容：Hauler's Dream 等搬运类 mod、Universal Trade Hub、Better Architect Menu 等（注意：原 mod 自带自动收纳与 Pick Up And Haul 互斥，10 月版起会主动提示）
 
 > 完整设置项与逐条说明都在游戏内：**选项 → Mod 设置 →「数字存储 · 补丁设置」**。
 

@@ -31,7 +31,10 @@ Digital Storage — Extension Patch
 · 其它：难民与访客索要物资、异象心灵仪式的祭品、从核心取食时按心情挑合适的食物
 每项都能单独开关；其中「动物随机进食」为实验性、默认关。
 
-◆ 制作代理修复
+◆ 数字工人修复
+· 建造投料修复：不再把大量材料囤进工地白白销毁，同一工地也不再被重复送料
+· 数字工人修复：隐藏替身不再被原版 AI 派活、不再抽到「禁用工作」的背景
+· 制作代理三项可选修复（实验性，默认关）：同一配方重复排产 / 工作台公平共享 / 并行取料互不干扰
 · 能识别其它 mod 的灶台 / 厨房 / 工作台（不再「配方选得到却永远缺料」）
 · 「维持数量」达标后让出工作台，后面的配方不再苦等
 · 打开制作面板时可以正常调整游戏速度
@@ -45,8 +48,8 @@ Digital Storage — Extension Patch
 · 自动补货（默认关）：把核心里的物品送进优先级更高的储存区
 
 ◆ 其它修复与兼容
-· 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出
-· 兼容：搬运类 mod（Pick Up And Haul / Hauler's Dream）、Universal Trade Hub、Better Architect Menu
+· 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出、搬运判定被「幽灵物品」卡死
+· 兼容：Hauler's Dream 等搬运类 mod、Universal Trade Hub、Better Architect Menu（原 mod 自带自动收纳与 Pick Up And Haul 互斥，10 月版起会主动提示）
 
 ◆ 可调项
 全部功能都能在「Mod 设置」里单独开关，具体范围与默认值以游戏内说明为准：
@@ -55,6 +58,7 @@ Digital Storage — Extension Patch
 ◆ 致谢与许可
 原 mod 作者：Cagier.阳（CagierAsh123）—— 感谢原作者的优秀作品。
 原 mod 开源仓库：https://github.com/CagierAsh123/Digital-Storage
+本补丁开源仓库：https://github.com/ACqwq/Digital-Storage-Extension-Patch
 本补丁遵循原 mod 的许可协议（非商用 · 署名 · 衍生同协议开源），完整条款见补丁源码仓库 LICENSE。
 ]]></description>
   <packageId>cagier.digitalstorage.patch</packageId>

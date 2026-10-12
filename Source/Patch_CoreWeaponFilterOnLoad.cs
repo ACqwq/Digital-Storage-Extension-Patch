@@ -65,10 +65,19 @@ namespace DigitalStorage.Patch
                 MethodInfo replacer = AccessTools.Method(
                     typeof(Patch_CoreWeaponFilterOnLoad), nameof(PreserveOrApply));
 
-                if (exposeData == null || applyWeaponFilter == null || replacer == null)
+                if (exposeData == null || replacer == null)
                 {
-                    Log.Warning("[数字存储补丁] 核心筛选保留：定位不到 ExposeData/ApplyWeaponFilter"
+                    Log.Warning("[数字存储补丁] 核心筛选保留：定位不到 ExposeData"
                                 + "（原 mod 可能已改结构），本项跳过。");
+                    return;
+                }
+                if (applyWeaponFilter == null)
+                {
+                    // v0.62 上游对齐：10 月版把 ApplyWeaponFilter 整个重构掉了
+                    //（读档改走 GetStoreSettings + 尸体筛选迁移）——本项在新上游下自然退役；
+                    //  旧版上游（方法仍在）继续受本项保护。
+                    Log.Message("[数字存储补丁] 核心筛选保留：原 mod 已重构筛选路径"
+                                + "（ApplyWeaponFilter 不存在），本项自动退役（旧版上游仍生效）。");
                     return;
                 }
 

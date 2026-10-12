@@ -72,6 +72,73 @@ namespace DigitalStorage.Patch
             return FallbackCores(map);
         }
 
+        // ────────────────────────────────────────────────────────────────
+        // 跨版本取物桥（v0.62，上游 2026-10 对齐）：
+        // 原 mod 把 HaulSourceContents.ExtractTo 的签名从
+        //   (Thing, int, IntVec3, Map)                                        ← 10 月前
+        //   (Thing, int, IntVec3, Map, out int extracted, bool forbid = false) ← 10 月起
+        // 改成了带 out 的新签名（旧 4 参重载**不存在**）⇒ 编译期直调的一方遇到另一版本
+        // 会在 JIT 时报 MissingMethodException。这里统一走反射桥：按签名探测、优先新版，
+        // **一份构建同时兼容新旧上游**（调用频率低，反射开销可忽略）。
+        // ────────────────────────────────────────────────────────────────
+        private static readonly Type[] ExtractToNewSig =
+        {
+            typeof(Thing), typeof(int), typeof(IntVec3), typeof(Map),
+            typeof(int).MakeByRefType(), typeof(bool),
+        };
+
+        private static readonly Type[] ExtractToOldSig =
+        {
+            typeof(Thing), typeof(int), typeof(IntVec3), typeof(Map),
+        };
+
+        private static MethodInfo extractToNew;
+        private static MethodInfo extractToOld;
+        private static bool extractToResolved;
+
+        /// <summary>经跨版本桥调 <c>HaulSourceContents.ExtractTo</c>（新旧签名通吃）。</summary>
+        internal static Thing ExtractFromCoreCrossVersion(Thing t, int count, IntVec3 pos, Map map)
+        {
+            if (!extractToResolved)
+            {
+                extractToResolved = true;
+                try
+                {
+                    extractToNew = AccessTools.Method(typeof(HaulSourceContents), "ExtractTo", ExtractToNewSig);
+                    extractToOld = AccessTools.Method(typeof(HaulSourceContents), "ExtractTo", ExtractToOldSig);
+                }
+                catch
+                {
+                    extractToNew = null;
+                    extractToOld = null;
+                }
+                if (extractToNew == null && extractToOld == null)
+                {
+                    Log.ErrorOnce("[数字存储补丁] 找不到 HaulSourceContents.ExtractTo"
+                                  + "（新旧签名都不匹配），从核心取货不可用。", 779001);
+                }
+            }
+
+            try
+            {
+                if (extractToNew != null)
+                {
+                    // out 放在 args[4]（值忽略）；forbid 默认 false，与旧行为一致。
+                    object[] args = { t, count, pos, map, 0, false };
+                    return (Thing)extractToNew.Invoke(null, args);
+                }
+                if (extractToOld != null)
+                {
+                    return (Thing)extractToOld.Invoke(null, new object[] { t, count, pos, map });
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorOnce("[数字存储补丁] 跨版本取货失败：" + ex.GetType().Name + ": " + ex.Message, 779002);
+            }
+            return null;
+        }
+
         private static List<Building_StorageCore> FallbackCores(Map map)
         {
             List<Building_StorageCore> result = new List<Building_StorageCore>();
@@ -447,7 +514,7 @@ namespace DigitalStorage.Patch
                         continue;
                     }
 
-                    Thing taken = HaulSourceContents.ExtractTo(found, want, pos, map);
+                    Thing taken = ExtractFromCoreCrossVersion(found, want, pos, map);
                     if (taken != null)
                     {
                         return taken;

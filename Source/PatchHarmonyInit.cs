@@ -374,8 +374,11 @@ namespace DigitalStorage.Patch
                 }
                 else
                 {
-                    Log.Message("[数字存储补丁] 已挂载：交易付款在信标地面不够时可从数字核心扣银"
-                                + "（默认开启，设置 →「交易」可关）。");
+                    bool upstreamCorePay = AccessTools.TypeByName(
+                        "DigitalStorage.HarmonyPatches.DigitalStorageTradeUtility") != null;
+                    Log.Message(upstreamCorePay
+                        ? "[数字存储补丁] 检测到原 mod 自带核心付款（10 月版），交易付款补齐自动让位（旧版上游仍由本补丁兜底）。"
+                        : "[数字存储补丁] 已挂载：交易付款在信标地面不够时可从数字核心扣银（默认开启，设置 →「交易」可关）。");
                 }
             }
             catch (System.Exception ex)

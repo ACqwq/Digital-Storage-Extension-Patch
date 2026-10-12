@@ -390,7 +390,7 @@ namespace DigitalStorage.Patch
                     continue;
                 }
                 int n = Mathf.Min(amount - taken, t.stackCount);
-                Thing placed = HaulSourceContents.ExtractTo(t, n, projector.Position, map);
+                Thing placed = CoreContentAccess.ExtractFromCoreCrossVersion(t, n, projector.Position, map);
                 if (placed == null)
                 {
                     break; // 没地方放（ExtractTo 已经把它放回核心）

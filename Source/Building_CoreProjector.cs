@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Reflection;
 using DigitalStorage.AI;
 using DigitalStorage.Components;
 using DigitalStorage.Settings;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace DigitalStorage.Patch
 {
@@ -509,6 +512,13 @@ namespace DigitalStorage.Patch
             {
                 return false;
             }
+            // v0.62 上游对齐：跟随原 mod 的「自动收纳避让作业」开关（10 月版新增，默认关；
+            // 旧版上游无此字段 ⇒ 视为关）。开启时两条新判据生效（镜像 CompAutoIngest.RejectReason）：
+            //   ① 作业目标不收：任何小人的当前 / 排队作业正拿它当目标（targetA/B/C + 两条队列）。
+            if (YieldToJobs() && IsTargetOfAnyPawnJob(t, map))
+            {
+                return false;
+            }
             // 牢房不收。
             Room room = t.PositionHeld.GetRoom(map);
             if (room != null && room.IsPrisonCell)
@@ -524,7 +534,150 @@ namespace DigitalStorage.Patch
             {
                 return false;
             }
+            //   ② 工作台旁宽限：躺在"还有 bill"的工作台 8 邻内、自首次发现起 300 tick 未满
+            //     （只放宽一次、不刷新；躺够 5 秒还没人要就照旧收走）。
+            if (YieldToJobs() && IsInWaitingBillGiverRim(t, map))
+            {
+                return false;
+            }
             return true;
+        }
+
+        // ── v0.62 上游对齐：两条新收纳判据 + 开关解析（镜像自上游 CompAutoIngest，语义逐条对应）──
+
+        private static bool yieldToJobsResolved;
+        private static FieldInfo yieldToJobsField;
+
+        /// <summary>原 mod「自动收纳避让作业」开关（10 月版新增；旧版无此字段 ⇒ 视为关）。</summary>
+        private static bool YieldToJobs()
+        {
+            if (!yieldToJobsResolved)
+            {
+                yieldToJobsResolved = true;
+                try
+                {
+                    yieldToJobsField = AccessTools.Field(typeof(DigitalStorageSettings), "autoIngestYieldToJobs");
+                }
+                catch
+                {
+                    yieldToJobsField = null;
+                }
+            }
+            try
+            {
+                return yieldToJobsField != null && (bool)yieldToJobsField.GetValue(null);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>① 这件东西是任何已 spawn 小人"当前 / 排队中"作业的目标。</summary>
+        private static bool IsTargetOfAnyPawnJob(Thing t, Map map)
+        {
+            IReadOnlyList<Pawn> pawns = map.mapPawns?.AllPawnsSpawned;
+            if (pawns == null || t == null)
+            {
+                return false;
+            }
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                Pawn pawn = pawns[i];
+                if (pawn?.jobs == null)
+                {
+                    continue;
+                }
+                if (JobTargets(t, pawn.jobs.curJob))
+                {
+                    return true;
+                }
+                JobQueue queue = pawn.jobs.jobQueue;
+                if (queue == null)
+                {
+                    continue;
+                }
+                for (int j = 0; j < queue.Count; j++)
+                {
+                    if (JobTargets(t, queue[j].job))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private static bool JobTargets(Thing t, Job job)
+        {
+            if (job == null)
+            {
+                return false;
+            }
+            if (job.targetA.Thing == t || job.targetB.Thing == t || job.targetC.Thing == t)
+            {
+                return true;
+            }
+            return TargetQueueContains(job.targetQueueA, t) || TargetQueueContains(job.targetQueueB, t);
+        }
+
+        private static bool TargetQueueContains(List<LocalTargetInfo> queue, Thing t)
+        {
+            if (queue == null)
+            {
+                return false;
+            }
+            for (int i = 0; i < queue.Count; i++)
+            {
+                if (queue[i].Thing == t)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static readonly Dictionary<int, int> rimFirstSeen = new Dictionary<int, int>();
+
+        /// <summary>② 躺在"还有 bill"的工作台旁 8 邻内，且宽限（300 tick，自首次发现起）未满。</summary>
+        private static bool IsInWaitingBillGiverRim(Thing t, Map map)
+        {
+            if (!HasWaitingBillGiverAround(t.PositionHeld, map))
+            {
+                return false;
+            }
+            return !RimGraceElapsed(t);
+        }
+
+        private static bool HasWaitingBillGiverAround(IntVec3 pos, Map map)
+        {
+            for (int i = 0; i < GenAdj.AdjacentCells.Length; i++)
+            {
+                IntVec3 cell = pos + GenAdj.AdjacentCells[i];
+                if (!cell.InBounds(map))
+                {
+                    continue;
+                }
+                Building edifice = cell.GetEdifice(map);
+                if (edifice != null && !edifice.Destroyed
+                    && edifice is IBillGiver billGiver
+                    && billGiver.BillStack != null && billGiver.BillStack.Count > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool RimGraceElapsed(Thing t)
+        {
+            int now = Find.TickManager.TicksGame;
+            if (!rimFirstSeen.TryGetValue(t.thingIDNumber, out int firstSeen))
+            {
+                rimFirstSeen[t.thingIDNumber] = now;
+                return false;
+            }
+            return now - firstSeen >= 300;
         }
 
         /// <summary>把物品收进核心（语义同原 mod 的 CompAutoIngest.TryIngest）。</summary>

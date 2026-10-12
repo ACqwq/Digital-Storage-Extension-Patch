@@ -182,7 +182,7 @@ namespace DigitalStorage.Patch
                 //   稍后被原 mod 自动收纳收回核心**，不会丢东西，也不会被消耗。
                 //   （对比：Patch_InventoryStockFromCore 那边因为拿得到缺口数量，已改为按需取。）
                 int want = Math.Max(1, found.stackCount);
-                Thing taken = HaulSourceContents.ExtractTo(found, want, hauler.Position, map);
+                Thing taken = CoreContentAccess.ExtractFromCoreCrossVersion(found, want, hauler.Position, map);
                 if (taken != null)
                 {
                     cores.Clear();

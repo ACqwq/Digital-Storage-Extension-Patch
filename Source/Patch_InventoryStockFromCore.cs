@@ -257,7 +257,7 @@ namespace DigitalStorage.Patch
                     continue;
                 }
 
-                Thing taken = HaulSourceContents.ExtractTo(found, want, pawn.Position, map);
+                Thing taken = CoreContentAccess.ExtractFromCoreCrossVersion(found, want, pawn.Position, map);
                 if (taken != null)
                 {
                     cores.Clear();
