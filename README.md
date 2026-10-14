@@ -1,6 +1,6 @@
 # 数字存储·扩展补丁 / Digital Storage — Extension Patch
 
-为《**【CA】数字存储-Digital Storage 4.0**》打造的**社区扩展补丁**（RimWorld 1.7）：
+为《**【CA】数字存储-Digital Storage 4.0**》打造的**社区扩展补丁**（RimWorld 1.6 / 1.7 双版本）：
 补上原 mod 缺少的功能，修复已知问题。侧载实现 —— **不改动原 mod、不改动游戏本体**；
 绝大多数功能都能单独关闭，关闭即回到原 mod 行为。
 
@@ -48,13 +48,13 @@
 
 ## 安装
 
-1. **前置**：RimWorld 1.7 · 原 mod《【CA】数字存储-Digital Storage 4.0》· Harmony；
+1. **前置**：RimWorld 1.6 或 1.7 · 原 mod《【CA】数字存储-Digital Storage 4.0》· Harmony；
 2. **工坊订阅（推荐）**：订阅本补丁的工坊条目（ID `3815069573`），并在 Mod 列表里把本补丁排在**原 mod 与 Harmony 之后**；
 3. **手动安装**：把本目录整体放进 `<RimWorld>/Mods/`（文件夹名随意），同样确保排序在原 mod 之后。
 
 ## 从源码构建
 
-需要：Windows + 一份装好**原 mod 与 Harmony** 的 RimWorld 1.7 + Python 3.8+，以及一个 Roslyn 编译器
+需要：Windows + 一份装好**原 mod 与 Harmony** 的 RimWorld（1.6 / 1.7 均可）+ Python 3.8+，以及一个 Roslyn 编译器
 （推荐安装 .NET SDK；已装 Visual Studio / Build Tools 也可）。
 
 把本仓库（或 Release 源码包）放进 `<RimWorld>/Mods/` 后，一条命令即可：
@@ -64,15 +64,16 @@ python build.py
 ```
 
 脚本会自动探测：游戏目录、Harmony（工坊 2009463077）、原 mod DLL（工坊 3623684313）、Roslyn 编译器。
+本 mod 采用 **1.6 / 1.7 双版本目录**（`LoadFolders.xml` 路由）——脚本会**按你机器上的游戏版本自动选择**，产出到 `1.6/Assemblies/` 或 `1.7/Assemblies/`。
 也可以手动指定：
 
 ```bash
 python build.py --game-dir "<你的Steam库>/steamapps/common/RimWorld" \
-                --harmony "<你的Steam库>/workshop/content/294100/2009463077/Current/Assemblies/0Harmony.dll" \
-                --orig-dll "<你的Steam库>/workshop/content/294100/3623684313/Current/Assemblies/DigitalStorage40.dll"
+                --harmony "<你的Steam库>/workshop/content/294100/2009463077/1.7/Assemblies/0Harmony.dll" \
+                --orig-dll "<你的Steam库>/workshop/content/294100/3623684313/Assemblies/DigitalStorage.dll"
 ```
 
-产物：`Assemblies/DigitalStoragePatch.dll`。注意：不同机器/不同编译器版本构建出的字节可能不同，属正常现象；
+产物：`1.7/Assemblies/DigitalStoragePatch.dll`（1.6 机器上则为 `1.6/Assemblies/DigitalStoragePatch.dll`）。注意：不同机器/不同编译器版本构建出的字节可能不同，属正常现象；
 官方发布版由维护者用同一套源码构建（见工坊 / Releases）。
 
 ## 仓库结构
