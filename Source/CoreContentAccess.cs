@@ -264,6 +264,59 @@ namespace DigitalStorage.Patch
             return null;
         }
 
+        /// <summary>
+        /// 在核心内容物里找第一件满足 <paramref name="predicate"/>、可被检查者预约、
+        /// 且 **stackCount ≥ <paramref name="minCount"/>** 的物品
+        /// （供需要"镜像原版单堆足够语义"的取货方，如天灯节取木）。
+        /// </summary>
+        internal static Thing FindInCoresWhere(
+            Map map, Func<Thing, bool> predicate, List<Pawn> reserveCheckers, int minCount)
+        {
+            if (map == null || predicate == null)
+            {
+                return null;
+            }
+
+            List<Building_StorageCore> cores = UsableCores(map);
+            if (cores == null)
+            {
+                return null;
+            }
+
+            for (int c = 0; c < cores.Count; c++)
+            {
+                Building_StorageCore core = cores[c];
+                if (core == null || !core.Spawned)
+                {
+                    continue;
+                }
+
+                ThingOwner owner = core.GetDirectlyHeldThings();
+                if (owner == null)
+                {
+                    continue;
+                }
+
+                for (int i = 0; i < owner.Count; i++)
+                {
+                    Thing t = owner[i];
+                    if (!IsUsable(t) || t.stackCount < minCount || !predicate(t))
+                    {
+                        continue;
+                    }
+
+                    if (!CanAnyReserve(reserveCheckers, t, minCount))
+                    {
+                        continue;
+                    }
+
+                    return t;
+                }
+            }
+
+            return null;
+        }
+
         private static bool CanAnyReserve(List<Pawn> checkers, Thing t, int count)
         {
             if (checkers == null || checkers.Count == 0)

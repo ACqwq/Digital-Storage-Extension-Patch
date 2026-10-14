@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""构建 DigitalStoragePatch.dll —— 开源版构建脚本。
+"""构建 DigitalStoragePatch.dll —— 开源版构建脚本（兼容 RimWorld 1.6 / 1.7 两种布局）。
 
-自动探测三样外部输入（全部可手动指定）：
-  · 游戏目录   RimWorld（含 RimWorldWin64_Data/Managed）   --game-dir / 环境变量 RIMWORLD_DIR
-  · Harmony    工坊 2009463077 的 0Harmony.dll             --harmony   / 环境变量 HARMONY_DLL
-  · 原 mod DLL 工坊 3623684313 的 DigitalStorage 程序集     --orig-dll  / 环境变量 DS_ORIG_DLL
+自动探测外部输入（全部可手动指定）：
+  · 游戏目录   --game-dir / 环境变量 RIMWORLD_DIR
+       1.6：`<游戏>/RimWorldWin64_Data/Managed`；1.7（Waylith/CoreCLR）：程序集在**游戏根目录**
+  · Harmony    工坊 2009463077 的 0Harmony.dll（1.7 起在 `1.7/Assemblies/`，旧版是 `Current/`）
+  · 原 mod DLL 工坊 3623684313 的 DigitalStorage 程序集（--orig-dll 可指定）
 编译器（Roslyn）自动探测：--csc / 环境变量 CSC → .NET SDK → VS/BuildTools 的 MSBuild Roslyn。
+
+两种编译口径（脚本自动判）：
+  · **1.7 模式**：引用游戏自带 BCL（System.Runtime 10.0 体系；net472 参考程序集会与 0Harmony 1.7 撞 CS1705）
+    + `UnityStubs.dll`（旧 UnityEngine 模块已被移除）+ `Waylith.dll`（Material 等渲染类型）。
+  · **1.6 回退模式**：net472 参考程序集 + 三个 `UnityEngine.*Module.dll` + 游戏 Managed 的 mscorlib/System。
 
 最省事的用法（把本仓库放进 `<RimWorld>/Mods/` 后直接跑）：
     python build.py
 
 其它用法：
     python build.py --game-dir "D:/SteamLibrary/steamapps/common/RimWorld"
-    python build.py --harmony "…/2009463077/Current/Assemblies/0Harmony.dll" --orig-dll "…/DigitalStorage40.dll"
+    python build.py --harmony "…/2009463077/1.7/Assemblies/0Harmony.dll" --orig-dll "…/DigitalStorage.dll"
 
 产物：Assemblies/DigitalStoragePatch.dll（并生成 Source/build.rsp，可忽略）。
 
@@ -31,13 +37,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SRC_DIR = os.path.join(HERE, "Source")
 ASM_DIR = os.path.join(HERE, "Assemblies")
 
-UNITY_REFS = [
+UNITY_REFS_16 = [
     "UnityEngine.CoreModule.dll",
     "UnityEngine.IMGUIModule.dll",
     "UnityEngine.TextRenderingModule.dll",
 ]
-CORE_REFS = ["mscorlib.dll", "System.dll", "System.Core.dll", "netstandard.dll"]
-CORE_OPTIONAL = {"netstandard.dll"}   # Unity Mono 的 mscorlib 走 netstandard 转发；个别安装缺失则跳过
+UNITY_REF_17 = "UnityStubs.dll"
 NOWARN = "1701,1702,8600,8601,8602,8603,8604,0436,0169,0649"
 
 
@@ -69,9 +74,14 @@ def probe_game_dir(cli):
         cands.append(os.path.join(root, "steamapps", "common", "RimWorld"))
     for c in cands:
         c = norm(c)
-        if c and os.path.isdir(os.path.join(c, "RimWorldWin64_Data", "Managed")):
+        if not c or not os.path.isdir(c):
+            continue
+        # 1.7：游戏根目录直接有 Assembly-CSharp.dll；1.6：RimWorldWin64_Data/Managed
+        if os.path.isfile(os.path.join(c, "Assembly-CSharp.dll")):
             return c
-    fail("找不到 RimWorld 游戏目录 —— 用 --game-dir 指定（目录里应有 RimWorldWin64_Data）。")
+        if os.path.isdir(os.path.join(c, "RimWorldWin64_Data", "Managed")):
+            return c
+    fail("找不到 RimWorld 游戏目录 —— 用 --game-dir 指定（1.7 认游戏根目录，1.6 认 RimWorldWin64_Data）。")
 
 
 def probe_harmony(cli, game_dir):
@@ -81,9 +91,12 @@ def probe_harmony(cli, game_dir):
     if os.environ.get("HARMONY_DLL"):
         cands.append(os.environ["HARMONY_DLL"])
     steamapps = norm(os.path.join(game_dir, "..", ".."))
-    for sub in ("Current/Assemblies", "Assemblies"):
-        cands.append(os.path.join(steamapps, "workshop", "content", "294100",
-                                  "2009463077", sub, "0Harmony.dll"))
+    mod_root = os.path.join(steamapps, "workshop", "content", "294100", "2009463077")
+    # 1.7 起按游戏版本分目录：新→旧依次
+    for sub in ("1.7/Assemblies", "1.8/Assemblies", "Current/Assemblies", "1.6/Assemblies"):
+        cands.append(os.path.join(mod_root, sub, "0Harmony.dll"))
+    # 兜底：任意版本目录
+    cands.extend(sorted(glob.glob(os.path.join(mod_root, "*", "Assemblies", "0Harmony.dll"))))
     for c in cands:
         if c and os.path.isfile(c):
             return norm(c)
@@ -154,39 +167,81 @@ def probe_compiler(cli):
          "或用 --csc 指定 csc 的路径（或其所在目录）。")
 
 
+def resolve_refs(game_dir, harmony, orig):
+    """返回 (模式名, 引用列表, 游戏托管目录)。1.7 与 1.6 两套口径。"""
+    managed_17 = game_dir
+    managed_16 = os.path.join(game_dir, "RimWorldWin64_Data", "Managed")
+
+    if os.path.isfile(os.path.join(managed_17, UNITY_REF_17)):
+        managed = managed_17
+        is_17 = True
+    elif os.path.isdir(managed_16):
+        managed = managed_16
+        is_17 = False
+    else:
+        fail("游戏目录里既没有 1.7 的 UnityStubs.dll，也没有 1.6 的 RimWorldWin64_Data/Managed。")
+
+    refs = []
+
+    def add(p):
+        if os.path.isfile(p):
+            refs.append(norm(p))
+
+    add(os.path.join(managed, "Assembly-CSharp.dll"))
+    add(harmony)
+    add(orig)
+
+    if is_17:
+        # 游戏自带 BCL（System.Runtime 10.0 体系；原生 DLL 无托管元数据要排除）
+        for name in sorted(os.listdir(managed)):
+            if not name.lower().endswith(".dll"):
+                continue
+            if not (name == "netstandard.dll" or name == "mscorlib.dll"
+                    or name.startswith("System.")):
+                continue
+            if name.endswith(".Native.dll"):
+                continue
+            add(os.path.join(managed, name))
+        # Unity API：UnityStubs + Waylith（Material 等渲染类型）
+        add(os.path.join(managed, UNITY_REF_17))
+        add(os.path.join(managed, "Waylith.dll"))
+        add(os.path.join(managed, "Waylith.UnityCompat.dll"))
+        mode = "1.7（Waylith/CoreCLR：游戏根目录 + UnityStubs + 游戏 BCL）"
+    else:
+        for name in ("mscorlib.dll", "System.dll", "System.Core.dll", "netstandard.dll"):
+            add(os.path.join(managed, name))
+        for u in UNITY_REFS_16:
+            add(os.path.join(managed, u))
+        mode = "1.6（Managed + UnityEngine 模块 + Mono BCL）"
+    return mode, refs, managed
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--game-dir", help="RimWorld 游戏目录（含 RimWorldWin64_Data）")
+    ap.add_argument("--game-dir", help="RimWorld 游戏目录（1.7 根目录 / 1.6 含 RimWorldWin64_Data）")
     ap.add_argument("--harmony", help="0Harmony.dll 路径")
     ap.add_argument("--orig-dll", help="原 mod（Digital Storage 4.0）的程序集路径")
-    ap.add_argument("--csc", help="Roslyn 编译器路径（csc.exe 或 csc.dll）")
+    ap.add_argument("--csc", help="Roslyn 编译器路径（csc.exe 或 csc.dll，或其所在目录）")
     args = ap.parse_args()
 
     if not os.path.isdir(SRC_DIR):
         fail("找不到 Source/ 目录（本脚本应放在仓库根目录）。")
 
     game_dir = probe_game_dir(args.game_dir)
-    managed = os.path.join(game_dir, "RimWorldWin64_Data", "Managed")
     harmony = probe_harmony(args.harmony, game_dir)
     orig = probe_orig_dll(args.orig_dll, game_dir)
     dotnet_exe, csc = probe_compiler(args.csc)
+    mode, refs, managed = resolve_refs(game_dir, harmony, orig)
 
-    refs = []
-    for name in CORE_REFS + ["Assembly-CSharp.dll"] + UNITY_REFS:
-        p = os.path.join(managed, name)
-        if not os.path.isfile(p):
-            if name in CORE_OPTIONAL:
-                continue
-            fail("游戏 Managed 目录缺少 %s —— 游戏安装可能不完整。" % name)
-        refs.append(p)
-    refs.append(harmony)
-    refs.append(orig)
+    info("模式      : " + mode)
+    info("游戏目录  : " + game_dir)
+    info("Harmony   : " + harmony)
+    info("原 mod    : " + orig)
+    info("编译器    : " + (csc if not dotnet_exe else dotnet_exe + " " + csc))
 
-    info("游戏目录 : " + game_dir)
-    info("Harmony  : " + harmony)
-    info("原 mod   : " + orig)
-    info("编译器   : " + (csc if not dotnet_exe else dotnet_exe + " " + csc))
+    if not refs or not any(r.endswith("Assembly-CSharp.dll") for r in refs):
+        fail("引用集不完整（缺 Assembly-CSharp.dll 等）—— 检查游戏安装与上面的路径。")
 
     os.makedirs(ASM_DIR, exist_ok=True)
     out_dll = os.path.join(ASM_DIR, "DigitalStoragePatch.dll")

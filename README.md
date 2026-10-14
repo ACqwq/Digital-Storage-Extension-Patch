@@ -1,6 +1,6 @@
 # 数字存储·扩展补丁 / Digital Storage — Extension Patch
 
-为《**【CA】数字存储-Digital Storage 4.0**》打造的**社区扩展补丁**（RimWorld 1.6）：
+为《**【CA】数字存储-Digital Storage 4.0**》打造的**社区扩展补丁**（RimWorld 1.7）：
 补上原 mod 缺少的功能，修复已知问题。侧载实现 —— **不改动原 mod、不改动游戏本体**；
 绝大多数功能都能单独关闭，关闭即回到原 mod 行为。
 
@@ -39,7 +39,7 @@
 
 ### 修复与兼容
 - 修复：核心筛选读档被重置、半成品被吞、废料容器清不掉、送物资卡死、有毒垃圾取不出、读档幽灵物品报错刷屏、
-  建造材料被成堆搬进工地、数字工人替身被原版 AI 派活 等
+  建造材料被成堆搬进工地、数字工人替身被原版 AI 派活、天灯节（Ideology）认不到核心原木、通讯台「索要位置」从核心付款不扣银 等
 - 兼容：Hauler's Dream 等搬运类 mod、Universal Trade Hub、Better Architect Menu 等（注意：原 mod 自带自动收纳与 Pick Up And Haul 互斥，10 月版起会主动提示）
 
 > 完整设置项与逐条说明都在游戏内：**选项 → Mod 设置 →「数字存储 · 补丁设置」**。
@@ -48,13 +48,13 @@
 
 ## 安装
 
-1. **前置**：RimWorld 1.6 · 原 mod《【CA】数字存储-Digital Storage 4.0》· Harmony；
+1. **前置**：RimWorld 1.7 · 原 mod《【CA】数字存储-Digital Storage 4.0》· Harmony；
 2. **工坊订阅（推荐）**：订阅本补丁的工坊条目（ID `3815069573`），并在 Mod 列表里把本补丁排在**原 mod 与 Harmony 之后**；
 3. **手动安装**：把本目录整体放进 `<RimWorld>/Mods/`（文件夹名随意），同样确保排序在原 mod 之后。
 
 ## 从源码构建
 
-需要：Windows + 一份装好**原 mod 与 Harmony** 的 RimWorld 1.6 + Python 3.8+，以及一个 Roslyn 编译器
+需要：Windows + 一份装好**原 mod 与 Harmony** 的 RimWorld 1.7 + Python 3.8+，以及一个 Roslyn 编译器
 （推荐安装 .NET SDK；已装 Visual Studio / Build Tools 也可）。
 
 把本仓库（或 Release 源码包）放进 `<RimWorld>/Mods/` 后，一条命令即可：

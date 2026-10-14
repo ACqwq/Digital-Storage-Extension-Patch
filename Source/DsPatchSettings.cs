@@ -769,6 +769,13 @@ namespace DigitalStorage.Patch
         public bool ritualOfferingFromCore = true;
 
         /// <summary>
+        /// 允许 Ideology「天灯节」（Sky Lanterns）从数字核心取原木（默认**开**）。
+        /// 启动检查（GetBlockingIssues）与取木职责（JobGiver_TakeCountToInventory）
+        /// 共用本开关：开则"能启动 + 能取到"，关则一并回到原版行为。
+        /// </summary>
+        public bool skyLanternFromCore = true;
+
+        /// <summary>
         /// 数字核心不再接收「未完成（Unfinished）」物品（默认**开**）。
         /// 两道防线：① 建成/读档时把该类别从核心筛选里取消；② 准入询问
         /// （<c>Accepts</c>）时再拒绝一次，即使某路径绕过筛选也进不去。
@@ -936,6 +943,7 @@ namespace DigitalStorage.Patch
             Scribe_Values.Look(ref craftUftRecipes, "craftUftRecipes", false);
             Scribe_Values.Look(ref keepCoreFilterOnLoad, "keepCoreFilterOnLoad", true);
             Scribe_Values.Look(ref ritualOfferingFromCore, "ritualOfferingFromCore", true);
+            Scribe_Values.Look(ref skyLanternFromCore, "skyLanternFromCore", true);
             Scribe_Values.Look(ref coreRejectUnfinished, "coreRejectUnfinished", true);
             Scribe_Values.Look(ref foodRestrictionAlign, "foodRestrictionAlign", false);
             Scribe_Values.Look(ref feedPatientReservable, "feedPatientReservable", true);

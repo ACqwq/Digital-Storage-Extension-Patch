@@ -427,6 +427,12 @@ namespace DigitalStorage.Patch
                 ref s.ritualOfferingFromCore,
                 "DigitalStoragePatch_RitualOfferingFromCoreDesc".Translate());
             l.Gap(2f);
+            // v0.63：Ideology 天灯节（启动检查 + 取木职责共用本开关）
+            l.CheckboxLabeled(
+                "DigitalStoragePatch_SkyLanternFromCore".Translate(),
+                ref s.skyLanternFromCore,
+                "DigitalStoragePatch_SkyLanternFromCoreDesc".Translate());
+            l.Gap(2f);
             l.CheckboxLabeled(
                 "DigitalStoragePatch_FeedPatientReservable".Translate(),
                 ref s.feedPatientReservable,

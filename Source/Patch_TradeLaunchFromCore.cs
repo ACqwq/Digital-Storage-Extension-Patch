@@ -65,12 +65,9 @@ namespace DigitalStorage.Patch
                 return true;
             }
 
-            // ★ v0.62 上游对齐：10 月版起原 mod 自带「地面 → 核心」付款（含断电门）⇒ 本项让位；
-            //   旧版上游（无该类型）继续由本补丁兜底。
-            if (UpstreamCorePaymentPresent())
-            {
-                return true;
-            }
+            // ★ v0.63：不再对"上游自带核心付款"让位 —— 实测其 Transpiler 通道在 1.7 下不可靠
+            //   （通讯台「索要XX位置」付款：读侧放行、扣侧找不到核心银 ⇒ 白拿信息不扣款；报告 INVEST-18）。
+            //   本项在"地面不足"场景接管（唯一经过实测的可靠路径）；地面足够时照常完全放行原版。
 
             // ★ 只有在"原版口径信标地面**凑不够**"时才考虑介入 —— 够就完全走原版，行为逐位一致。
             int ground = VanillaCoverage(resDef, map);
@@ -103,33 +100,6 @@ namespace DigitalStorage.Patch
                 Log.Error("[数字存储补丁] 从数字核心付款时抛异常（本次付款未完成）：" + ex);
             }
             return false;
-        }
-
-        // ── v0.62 上游对齐：上游 10 月版自带核心付款，检测到即让位 ──
-        private static bool upstreamPaymentResolved;
-        private static bool upstreamPaymentPresent;
-
-        /// <summary>
-        /// 原 mod 10 月版起自带「地面 → 核心」付款（<c>DigitalStorage.HarmonyPatches.DigitalStorageTradeUtility</c>
-        /// + 对 <c>LaunchThingsOfType</c> 的 Transpiler，含断电门）。存在时本补丁的付款项**整体让位**，
-        /// 避免两套实现互相打架；旧版上游（无此类型）仍由本补丁兜底。
-        /// </summary>
-        private static bool UpstreamCorePaymentPresent()
-        {
-            if (!upstreamPaymentResolved)
-            {
-                upstreamPaymentResolved = true;
-                try
-                {
-                    upstreamPaymentPresent =
-                        AccessTools.TypeByName("DigitalStorage.HarmonyPatches.DigitalStorageTradeUtility") != null;
-                }
-                catch
-                {
-                    upstreamPaymentPresent = false;
-                }
-            }
-            return upstreamPaymentPresent;
         }
 
         /// <summary>

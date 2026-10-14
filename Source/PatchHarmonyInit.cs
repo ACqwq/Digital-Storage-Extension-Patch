@@ -374,16 +374,37 @@ namespace DigitalStorage.Patch
                 }
                 else
                 {
-                    bool upstreamCorePay = AccessTools.TypeByName(
-                        "DigitalStorage.HarmonyPatches.DigitalStorageTradeUtility") != null;
-                    Log.Message(upstreamCorePay
-                        ? "[数字存储补丁] 检测到原 mod 自带核心付款（10 月版），交易付款补齐自动让位（旧版上游仍由本补丁兜底）。"
-                        : "[数字存储补丁] 已挂载：交易付款在信标地面不够时可从数字核心扣银（默认开启，设置 →「交易」可关）。");
+                    // v0.63：即使上游自带核心付款（10 月版），本项也不再让位 ——
+                    // 其实测在 1.7 下不可靠（INVEST-18：索要位置白拿不扣款），
+                    // 由本补丁在地面不足场景接管（地面足够时照常放行原版）。
+                    Log.Message("[数字存储补丁] 已挂载：交易付款在信标地面不够时可从数字核心扣银"
+                                + "（默认开启，设置 →「交易」可关）。");
                 }
             }
             catch (System.Exception ex)
             {
                 Log.Warning("[数字存储补丁] 交易付款补齐挂点校验失败：" + ex.GetType().Name + ": " + ex.Message);
+            }
+
+            // 天灯节（Ideology）：启动检查 + 取木职责走核心（默认开；两个补丁共用一个开关）。
+            try
+            {
+                System.Reflection.MethodInfo m = AccessTools.Method(
+                    typeof(RitualObligationTargetWorker_SkyLanterns), "GetBlockingIssues");
+                if (m == null)
+                {
+                    Log.Warning("[数字存储补丁] 找不到 RitualObligationTargetWorker_SkyLanterns.GetBlockingIssues，"
+                                + "「天灯节取木走核心」不可用（其余功能不受影响）。");
+                }
+                else
+                {
+                    Log.Message("[数字存储补丁] 已挂载：天灯节仪式可从数字核心取原木"
+                                + "（默认开启，设置 →「核心库存可用性」可关）。");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("[数字存储补丁] 天灯节取木挂点校验失败：" + ex.GetType().Name + ": " + ex.Message);
             }
 
             // 「给某某送物资」也可从数字核心取货：难民/访客索要物资时不再"未找到物品"（默认开）。

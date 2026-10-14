@@ -171,6 +171,9 @@
   <DigitalStoragePatch_RitualOfferingFromCore>异象仪式可从核心取祭品</DigitalStoragePatch_RitualOfferingFromCore>
   <DigitalStoragePatch_RitualOfferingFromCoreDesc>开启后，需要祭品的心灵仪式（异象）会把核心里的祭品算上，也能从核心取出用于收集。关闭 = 原版行为。</DigitalStoragePatch_RitualOfferingFromCoreDesc>
 
+  <DigitalStoragePatch_SkyLanternFromCore>天灯节可从核心取原木</DigitalStoragePatch_SkyLanternFromCore>
+  <DigitalStoragePatch_SkyLanternFromCoreDesc>开启后，天灯节（Ideology）会把数字核心里的原木算上（仪式可正常开始），放灯的小人也会从核心取木。关闭 = 原版行为。</DigitalStoragePatch_SkyLanternFromCoreDesc>
+
   <DigitalStoragePatch_FeedPatientReservable>病人喂食预约修复</DigitalStoragePatch_FeedPatientReservable>
   <DigitalStoragePatch_FeedPatientReservableDesc>开启后，修复「病人喂食一直起不来」的问题：选中的食物若正好被别人占用，就改从数字核心取一份新的来喂。默认开启；只在本来就会失败时才动手，不会让能成的喂食变坏。关闭 = 原版行为。</DigitalStoragePatch_FeedPatientReservableDesc>
 

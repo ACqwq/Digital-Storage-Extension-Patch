@@ -166,6 +166,9 @@
   <DigitalStoragePatch_RitualOfferingFromCore>Psychic rituals can take offerings from cores</DigitalStoragePatch_RitualOfferingFromCore>
   <DigitalStoragePatch_RitualOfferingFromCoreDesc>When on, psychic rituals that need offerings (Anomaly) count offerings kept in the core and can take them from there. Off = vanilla.</DigitalStoragePatch_RitualOfferingFromCoreDesc>
 
+  <DigitalStoragePatch_SkyLanternFromCore>Sky Lanterns can take wood from cores</DigitalStoragePatch_SkyLanternFromCore>
+  <DigitalStoragePatch_SkyLanternFromCoreDesc>When on, the Sky Lanterns ritual (Ideology) counts logs kept in the core (the ritual can start) and participants fetch the wood from there. Off = vanilla.</DigitalStoragePatch_SkyLanternFromCoreDesc>
+
   <DigitalStoragePatch_FeedPatientReservable>Feed-patient booking fix</DigitalStoragePatch_FeedPatientReservable>
   <DigitalStoragePatch_FeedPatientReservableDesc>When on, fixes feed-patient jobs that never start: if the chosen food is already taken by someone else, a fresh one is taken from the core instead. On by default; it only acts when the job would have failed anyway, so a feeding that would have worked is never made worse. Off = vanilla.</DigitalStoragePatch_FeedPatientReservableDesc>
 
