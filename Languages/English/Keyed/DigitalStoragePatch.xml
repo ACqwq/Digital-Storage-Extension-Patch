@@ -175,6 +175,12 @@
   <DigitalStoragePatch_CoreFoodScoringMood>Food picking accounts for mood</DigitalStoragePatch_CoreFoodScoringMood>
   <DigitalStoragePatch_CoreFoodScoringMoodDesc>When on, taking food from the core also weighs how much the meal will hurt mood, so a more suitable meal is picked first. On by default. Off = original mod behaviour.</DigitalStoragePatch_CoreFoodScoringMoodDesc>
 
+  <DigitalStoragePatch_FeedWithdrawGuard>Feeding withdraw guard</DigitalStoragePatch_FeedWithdrawGuard>
+  <DigitalStoragePatch_FeedWithdrawGuardDesc>When on, fixes "food keeps piling up on the floor and in inventories while feeding": the original mod withdraws food the eater cannot even eat (babies can only ingest milk and baby food; mutants and creatures from other mods have their own eating rules), so feeding fails forever and each attempt adds a pile. The guard judges by the vanilla can-eat rule and stops those doomed withdrawals. On by default; normal feeding is unaffected. Off = original mod behaviour.</DigitalStoragePatch_FeedWithdrawGuardDesc>
+
+  <DigitalStoragePatch_CoreFeedFromStorage>Allow taking food from the core (feeding/self-serve)</DigitalStoragePatch_CoreFeedFromStorage>
+  <DigitalStoragePatch_CoreFeedFromStorageDesc>Emergency switch: when off, feeding and self-serve stop withdrawing food from the digital core entirely (fully vanilla behaviour; the core is storage only). Keep it on under normal circumstances; construction fetching, drugs, hemogen and other withdrawals are unaffected.</DigitalStoragePatch_CoreFeedFromStorageDesc>
+
   <DigitalStoragePatch_GiveItemsFromCore>Supplying refugees / visitors can use core stock</DigitalStoragePatch_GiveItemsFromCore>
   <DigitalStoragePatch_GiveItemsFromCoreDesc>When on, goods asked for by refugees or visitors can be taken from the core and delivered when the map has none (nothing changes when the map already has them). Off = vanilla.</DigitalStoragePatch_GiveItemsFromCoreDesc>
 

@@ -306,6 +306,21 @@ namespace DigitalStorage.Patch
                           + ex.GetType().Name + ": " + ex.Message);
             }
 
+            // 喂食抽取护栏（纯修复，默认开，报告 INVEST-20 §10/§11）：多个看护者抢喂同一个
+            // 婴儿/病人时，原 mod 的取食兜底对每个失败者各抽一份到脚下（不查预留、不查背包），
+            // 叠加 BottleFeedBaby 的 TakeToInventory 只进不出 ⇒ 脚边与背包的食物越积越多。
+            // 本护栏在"手上/地图上已有同类可用食物"时撤销这次抽取；另有 coreFeedFromStorage
+            // 应急总开关可一键回到游戏原版行为。
+            try
+            {
+                Patch_FeedWithdrawGuard.Install();
+            }
+            catch (System.Exception ex)
+            {
+                Log.Error("[数字存储补丁] 喂食抽取护栏安装失败（其余功能不受影响）："
+                          + ex.GetType().Name + ": " + ex.Message);
+            }
+
             // 读档 / 新开局时清空投影核心注册表（防止上一局的登记项污染下一局）。
             try
             {

@@ -180,6 +180,12 @@
   <DigitalStoragePatch_CoreFoodScoringMood>取食排序考虑心情后果</DigitalStoragePatch_CoreFoodScoringMood>
   <DigitalStoragePatch_CoreFoodScoringMoodDesc>开启后，从数字核心取食时会把「吃了掉不掉心情」也算进评分，优先挑更合适的食物。默认开启。关闭 = 原 mod 行为。</DigitalStoragePatch_CoreFoodScoringMoodDesc>
 
+  <DigitalStoragePatch_FeedWithdrawGuard>喂食抽取护栏</DigitalStoragePatch_FeedWithdrawGuard>
+  <DigitalStoragePatch_FeedWithdrawGuardDesc>开启后，修复「喂食时脚边和背包的食物越积越多」的问题：原 mod 会抽出进食者根本吃不了的食物（婴儿只能吃奶类和婴儿食品；突变体、其它 mod 生物各有其进食规则），喂多少次败多少次。护栏按原版通用进食规则判定，让这类必败抽取不再发生。默认开启；正常喂食不受影响。关闭 = 原 mod 行为。</DigitalStoragePatch_FeedWithdrawGuardDesc>
+
+  <DigitalStoragePatch_CoreFeedFromStorage>允许从核心取食（喂食/自取）</DigitalStoragePatch_CoreFeedFromStorage>
+  <DigitalStoragePatch_CoreFeedFromStorageDesc>应急总开关：关闭后，喂食/自取不再从数字核心抽取食物，完全回到游戏原版行为（核心只当仓库用）。正常情况请保持开启；建造取料、药物、血袋等其它取料不受本开关影响。</DigitalStoragePatch_CoreFeedFromStorageDesc>
+
   <DigitalStoragePatch_GiveItemsFromCore>给难民 / 访客送物资时可用核心库存</DigitalStoragePatch_GiveItemsFromCore>
   <DigitalStoragePatch_GiveItemsFromCoreDesc>开启后，难民或访客索要物资时，地图上找不到的可以从数字核心取用并交付（地图上有现成的不会插手）。关闭 = 原版行为。</DigitalStoragePatch_GiveItemsFromCoreDesc>
 

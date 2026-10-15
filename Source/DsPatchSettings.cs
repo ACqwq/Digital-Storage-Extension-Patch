@@ -822,6 +822,23 @@ namespace DigitalStorage.Patch
         /// </summary>
         public bool coreFoodScoringMood = true;
 
+        /// <summary>
+        /// 喂食抽取护栏（G1'，报告 INVEST-20 §10/§11，纯修复默认开）：
+        /// 多个看护者抢喂同一个婴儿/病人时，原 mod 的取食兜底对<b>每个失败者</b>各抽一份
+        /// 食物到脚下（它不查预留、不查背包），加上 <c>BottleFeedBaby</c> 的
+        /// <c>TakeToInventory</c> 只进不出 ⇒ 脚边与背包的食物越积越多（实测 ×2→×53）。
+        /// 开启后：手上或地图上已有同类可用食物时不再重复抽取。
+        /// 只在会造成堆积的场景介入，正常喂食不受影响。
+        /// </summary>
+        public bool feedWithdrawGuard = true;
+
+        /// <summary>
+        /// 「从核心取食」应急总开关（G4'，报告 INVEST-20 §11）：关闭后，喂食/自取的
+        /// 查找不再从数字核心抽取食物（完全回到游戏原版行为，核心只当仓库用）。
+        /// 正常情况请保持开启。建造取料、药物、血袋等其它取料不受本开关影响。
+        /// </summary>
+        public bool coreFeedFromStorage = true;
+
         // ───────────────────────── 其它 ─────────────────────────
 
         /// <summary>首次运行标记，用于"默认行为 == 不打补丁"的兼容性初始化。</summary>
@@ -948,6 +965,8 @@ namespace DigitalStorage.Patch
             Scribe_Values.Look(ref foodRestrictionAlign, "foodRestrictionAlign", false);
             Scribe_Values.Look(ref feedPatientReservable, "feedPatientReservable", true);
             Scribe_Values.Look(ref coreFoodScoringMood, "coreFoodScoringMood", true);
+            Scribe_Values.Look(ref feedWithdrawGuard, "feedWithdrawGuard", true);
+            Scribe_Values.Look(ref coreFeedFromStorage, "coreFeedFromStorage", true);
             Scribe_Values.Look(ref craftAutomationButton, "craftAutomationButton", false);
             Scribe_Values.Look(ref withdrawPickerEnabled, "withdrawPickerEnabled", true);
             // v0.56–v0.59 的五个修复开关：此前漏了 ExposeData，重启后会被重置回默认值

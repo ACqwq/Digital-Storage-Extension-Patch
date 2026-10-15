@@ -442,6 +442,18 @@ namespace DigitalStorage.Patch
                 "DigitalStoragePatch_CoreFoodScoringMood".Translate(),
                 ref s.coreFoodScoringMood,
                 "DigitalStoragePatch_CoreFoodScoringMoodDesc".Translate());
+            l.Gap(2f);
+            // v0.65：喂食抽取护栏（G1'，报告 INVEST-20）——抢喂同一婴儿/病人时不再每人各抽一份
+            l.CheckboxLabeled(
+                "DigitalStoragePatch_FeedWithdrawGuard".Translate(),
+                ref s.feedWithdrawGuard,
+                "DigitalStoragePatch_FeedWithdrawGuardDesc".Translate());
+            l.Gap(2f);
+            // v0.65：从核心取食应急总开关（G4'，报告 INVEST-20）
+            l.CheckboxLabeled(
+                "DigitalStoragePatch_CoreFeedFromStorage".Translate(),
+                ref s.coreFeedFromStorage,
+                "DigitalStoragePatch_CoreFeedFromStorageDesc".Translate());
             l.Gap(24f);
 
             // ───────────── 界面 ─────────────
